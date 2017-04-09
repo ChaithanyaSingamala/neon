@@ -1,18 +1,18 @@
 #include <iostream>
-#include "test_application.h"
+#include "test_simpletriangle.h"
 #include "glad\glad.h"
 
-bool TestApplication::Init()
+bool TestSimpleTriangle::Init()
 {
 	return false;
 }
 
-bool TestApplication::Update()
+bool TestSimpleTriangle::Update()
 {
 	return false;
 }
 
-bool TestApplication::Render()
+bool TestSimpleTriangle::Render()
 {
 	glClearColor(0.3f, 0.1f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
