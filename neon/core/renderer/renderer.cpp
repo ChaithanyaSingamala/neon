@@ -21,6 +21,11 @@ Renderer::~Renderer()
 	DeInit();
 }
 
+GLshort Renderer::CreateVBO(std::vector<GLfloat> vertexArray)
+{
+	return GLshort();
+}
+
 void Renderer::Init()
 {
 	if (!gladLoadGL()) 
