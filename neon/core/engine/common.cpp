@@ -25,7 +25,7 @@ std::string GetFromCommandOption(std::string _for_value)
 	std::string resultStr = "";
 	Engine *engine = Engine::get();
 	std::vector<std::string> list = engine->GetCommandLineArguments();
-	auto result = std::find(list.begin(), list.end(), "-window");
+	auto result = std::find(list.begin(), list.end(), _for_value);
 	if (result != list.end())
 	{
 		if (result + 1 != list.end())

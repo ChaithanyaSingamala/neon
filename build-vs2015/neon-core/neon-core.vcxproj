@@ -89,7 +89,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)../neon/core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../neon/core;$(SolutionDir)../neon/external/glfw/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -97,7 +97,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)../neon/core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../neon/core;$(SolutionDir)../neon/external/glfw/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -107,7 +107,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)../neon/core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../neon/core;$(SolutionDir)../neon/external/glfw/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -121,7 +121,7 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)../neon/core;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../neon/core;$(SolutionDir)../neon/external/glfw/include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -132,15 +132,23 @@
     <ClInclude Include="..\..\neon\core\engine\application.h" />
     <ClInclude Include="..\..\neon\core\engine\common.h" />
     <ClInclude Include="..\..\neon\core\engine\engine.h" />
+    <ClInclude Include="..\..\neon\core\glad\glad.h" />
+    <ClInclude Include="..\..\neon\core\glad\khrplatform.h" />
     <ClInclude Include="..\..\neon\core\interface\glfw_interface.h" />
     <ClInclude Include="..\..\neon\core\interface\neon_interface.h" />
+    <ClInclude Include="..\..\neon\core\renderer\renderer.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\neon\core\engine\common.cpp" />
     <ClCompile Include="..\..\neon\core\engine\engine.cpp" />
     <ClCompile Include="..\..\neon\core\engine\main.cpp" />
+    <ClCompile Include="..\..\neon\core\glad\glad.c" />
     <ClCompile Include="..\..\neon\core\interface\glfw_interface.cpp" />
     <ClCompile Include="..\..\neon\core\interface\neon_interface.cpp" />
+    <ClCompile Include="..\..\neon\core\renderer\renderer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\neon\readme.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

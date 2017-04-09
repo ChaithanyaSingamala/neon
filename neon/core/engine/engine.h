@@ -6,6 +6,7 @@
 class Engine;
 class Application;
 class NeonInterface;
+class Renderer;
 
 class Engine
 {
@@ -14,13 +15,16 @@ class Engine
 	bool isExit = false;
 	Application *application = nullptr;
 	NeonInterface *neonInterface = nullptr;
+	Renderer *renderer;
 public:
 	Engine();
 	virtual ~Engine();
 
 	void Loop();
+	void ExitApplication() { isExit = true; }
 
 	static Engine *get();
+	static void destroy();
 
 	void RegisterCommandLineArguments(int argc, char **argv);
 	std::vector<std::string> GetCommandLineArguments();

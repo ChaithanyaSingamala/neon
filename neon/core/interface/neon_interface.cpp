@@ -31,11 +31,19 @@ NeonInterface* NeonInterface::CreateWindow()
 	}
 	else
 	{
-
+		std::cout << "No window system defined using GLFW" << std::endl;
+		instance = new GLFWInterface();
 	}
+
+	if (instance)
+		instance->Init();
 
 
 	return instance;
+}
+void NeonInterface::ExitApplication()
+{
+	Engine::get()->ExitApplication();
 }
 
 NeonInterface *NeonInterface::instance = nullptr;
@@ -47,4 +55,13 @@ NeonInterface *NeonInterface::get()
 	}
 
 	return instance;
+}
+void NeonInterface::destroy()
+{
+	if (instance)
+	{
+		instance->DeInit();
+		delete instance;
+	}	
+	instance = nullptr;
 }

@@ -15,7 +15,9 @@ public:
 	virtual bool Update() = 0;
 	virtual bool DeInit() = 0;
 
-	static NeonInterface *get();
+	virtual void ExitApplication();
 
+	static NeonInterface *get();
+	static void destroy();
 };
 

@@ -16,6 +16,13 @@
     <ClInclude Include="..\..\neon\core\engine\application.h">
       <Filter>engine</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\neon\core\renderer\renderer.h" />
+    <ClInclude Include="..\..\neon\core\glad\glad.h">
+      <Filter>glad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\neon\core\glad\khrplatform.h">
+      <Filter>glad</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\neon\core\interface\neon_interface.cpp">
@@ -33,6 +40,10 @@
     <ClCompile Include="..\..\neon\core\engine\main.cpp">
       <Filter>engine</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\neon\core\renderer\renderer.cpp" />
+    <ClCompile Include="..\..\neon\core\glad\glad.c">
+      <Filter>glad</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="interface">
@@ -41,5 +52,14 @@
     <Filter Include="engine">
       <UniqueIdentifier>{05bade18-501c-46ce-9250-0b8b07ecf9ec}</UniqueIdentifier>
     </Filter>
+    <Filter Include="renderer">
+      <UniqueIdentifier>{fa7a9bea-3784-42da-bb5a-ef4b24bdf202}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="glad">
+      <UniqueIdentifier>{b68c5c37-4aa8-42f9-b373-c3bd8a70992e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\neon\readme.txt" />
   </ItemGroup>
 </Project>

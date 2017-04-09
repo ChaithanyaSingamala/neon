@@ -3,6 +3,7 @@
 #include "common.h"
 #include <iostream>
 #include "interface\neon_interface.h"
+#include "renderer\renderer.h"
 
 Engine * Engine::engine = nullptr;
 
@@ -21,11 +22,18 @@ void Engine::Loop()
 	if (!application)
 		ASSERT("no application to run");
 	application->Init();
+	renderer = Renderer::get();
 	while (!isExit)
 	{
 		application->Update();
 		application->Render();
+		neonInterface->Update();
 	}
+	Renderer::destroy();
+	delete engine->application;
+	engine->application = nullptr;
+	NeonInterface::destroy();
+
 }
 
 void Engine::RegisterCommandLineArguments(int argc, char ** argv)
@@ -49,4 +57,11 @@ Engine *Engine::get()
 	}
 
 	return engine;
+}
+
+void Engine::destroy()
+{
+	if (engine)
+		delete engine;
+	engine = nullptr;
 }
