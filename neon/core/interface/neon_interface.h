@@ -5,7 +5,7 @@ class NeonInterface;
 
 class NeonInterface
 {
-	static NeonInterface* CreateWindow();
+	static NeonInterface* CreateNeonWindow();
 	static NeonInterface *instance;
 public:
 	NeonInterface();
@@ -14,6 +14,8 @@ public:
 	virtual bool Init() = 0;
 	virtual bool Update() = 0;
 	virtual bool DeInit() = 0;
+	virtual unsigned short Width(unsigned short _width = 0) = 0;
+	virtual unsigned short Height(unsigned short _height = 0) = 0;
 
 	virtual void ExitApplication();
 

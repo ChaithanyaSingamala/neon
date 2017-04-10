@@ -37,8 +37,6 @@ bool TestSimpleTriangle::Render()
 	glClearColor(0.3f, 0.1f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glViewport(0, 0, 1024, 768);
-
 	glDrawArrays(GL_TRIANGLES, 0, 3);
-	return false;
+	return true;
 }

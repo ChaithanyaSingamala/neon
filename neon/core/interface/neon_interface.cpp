@@ -13,7 +13,7 @@ NeonInterface::~NeonInterface()
 {
 }
 
-NeonInterface* NeonInterface::CreateWindow()
+NeonInterface* NeonInterface::CreateNeonWindow()
 {
 	NeonInterface* instance = nullptr;
 	std::string windowOptStr = GetFromCommandOption("-window");
@@ -51,7 +51,7 @@ NeonInterface *NeonInterface::get()
 {
 	if (!instance)
 	{
-		instance = NeonInterface::CreateWindow();
+		instance = NeonInterface::CreateNeonWindow();
 	}
 
 	return instance;

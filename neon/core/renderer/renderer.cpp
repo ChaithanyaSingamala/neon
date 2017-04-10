@@ -2,6 +2,7 @@
 #include "glad\glad.h"
 #include "../engine/common.h"
 #include <iostream>
+#include "interface\neon_interface.h"
 
 #ifdef GLAD_DEBUG
 // logs every gl call to the console
@@ -75,6 +76,23 @@ GLuint Renderer::GenerateShaderProgram(std::string _vertexShaderFile, std::strin
 	glUseProgram(programId);
 
 	return programId;
+}
+
+void Renderer::SetViewport(GLushort x, GLushort y, GLushort width, GLushort height)
+{
+	if (width == 0)
+		width = NeonInterface::get()->Width();
+	if (height == 0)
+		height = NeonInterface::get()->Height();
+#if ENABLE_DEBUG > 3
+	if (width > NeonInterface::get()->Width() || height > NeonInterface::get()->Height())
+		ASSERT("setting viewport greater than window size");
+	if (x != 0 || y != 0)
+		if ((width - x < 0) || (height - y < 0))
+			ASSERT("setting viewport x,y making viewport smaller than 0");
+#endif
+	glViewport(x, y, width, height);
+
 }
 
 void Renderer::Init()

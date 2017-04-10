@@ -1,6 +1,6 @@
 #include "glfw_interface.h"
 #include "../engine/common.h"
-
+#include "../engine/engine.h"
 
 
 GLFWInterface::GLFWInterface()
@@ -11,6 +11,14 @@ GLFWInterface::GLFWInterface()
 
 GLFWInterface::~GLFWInterface()
 {
+}
+
+void WindowSizeUpdated(GLFWwindow *window, int newwidth, int newheight)
+{
+	GLFWInterface::get()->Width(newwidth);
+	GLFWInterface::get()->Height(newheight);
+
+	Engine::get()->InterfaceWindowSizeUpdated(newwidth, newheight);
 }
 
 bool GLFWInterface::Init()
@@ -38,6 +46,9 @@ bool GLFWInterface::Init()
 		glfwTerminate();
 		ASSERT("GLFW failed to to create window!");
 	}
+
+	glfwSetWindowSizeCallback(window, WindowSizeUpdated);
+
 	std::cout << "created window width=" << width << " height=" << height << std::endl;
 	glfwMakeContextCurrent(window);
 
@@ -52,11 +63,11 @@ bool GLFWInterface::Update()
 	glfwSwapBuffers(window);
 	glfwPollEvents();
 
-	return false;
+	return true;
 }
 
 bool GLFWInterface::DeInit()
 {
 	glfwTerminate();
-	return false;
+	return true;
 }

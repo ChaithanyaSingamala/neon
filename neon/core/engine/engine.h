@@ -20,6 +20,8 @@ public:
 	Engine();
 	virtual ~Engine();
 
+	void InterfaceWindowSizeUpdated(unsigned short width, unsigned short height);
+
 	void Loop();
 	void ExitApplication() { isExit = true; }
 

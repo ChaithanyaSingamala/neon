@@ -15,6 +15,11 @@ Engine::~Engine()
 {
 }
 
+void Engine::InterfaceWindowSizeUpdated(unsigned short width, unsigned short height)
+{
+	renderer->SetViewport();
+}
+
 void Engine::Loop()
 {
 	neonInterface = NeonInterface::get();
@@ -22,7 +27,9 @@ void Engine::Loop()
 	application = Application::RegisterApplication();
 	if (!application)
 		ASSERT("no application to run");
-	application->Init();
+	if(!application->Init())
+		ASSERT("application Init not implemented");
+
 	while (!isExit)
 	{
 		application->Update();
