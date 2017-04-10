@@ -1,5 +1,4 @@
 #include "common.h"
-#include <assert.h>
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -14,12 +13,14 @@ Common::~Common()
 {
 }
 
+#if 0
 void ASSERT(char *str)
 {
 	std::cout << "assert::" << str  << std::endl << "exiting..." <<std::endl;
 	assert(0 && str);
 	exit(0);
 }
+#endif
 
 std::string GetFromCommandOption(std::string _for_value)
 {

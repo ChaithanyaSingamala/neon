@@ -1,5 +1,4 @@
 #include "renderer.h"
-#include "glad\glad.h"
 #include "../engine/common.h"
 #include <iostream>
 #include "interface\neon_interface.h"
@@ -103,8 +102,10 @@ void Renderer::Init()
 	glad_set_pre_callback(pre_gl_call);
 	glad_debug_glClear = glad_glClear;
 #endif
-	//std::cout<<"OpenGL "<<GLVersion.major<<GLVersion.minor<<std::endl;
+	std::cout<<"OpenGL "<<GLVersion.major<<GLVersion.minor<<std::endl;
 	std::cout<<"OpenGL "<<glGetString(GL_VERSION)<<", GLSL "<< glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
+	
+
 
 }
 

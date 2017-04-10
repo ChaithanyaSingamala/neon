@@ -1,6 +1,6 @@
 #include <iostream>
 #include "test_application.h"
-#include "glad\glad.h"
+#include "renderer\renderer.h"
 
 bool TestApplication::Init()
 {

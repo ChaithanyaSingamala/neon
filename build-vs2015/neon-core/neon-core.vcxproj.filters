@@ -25,6 +25,15 @@
     <ClInclude Include="..\..\neon\core\renderer\renderer.h">
       <Filter>renderer</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\neon\core\renderer\model.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\neon\core\renderer\model_manager.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\neon\core\renderer\opengl_header.h">
+      <Filter>renderer</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\neon\core\interface\neon_interface.cpp">
@@ -48,6 +57,12 @@
     <ClCompile Include="..\..\neon\core\renderer\renderer.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\neon\core\renderer\model.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\neon\core\renderer\model_manager.cpp">
+      <Filter>renderer</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="interface">
@@ -65,5 +80,8 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\neon\readme.txt" />
+    <Text Include="..\..\neon\core\renderer\note_glsl_version_details.txt">
+      <Filter>renderer</Filter>
+    </Text>
   </ItemGroup>
 </Project>

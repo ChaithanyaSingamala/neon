@@ -71,7 +71,7 @@ void TestSimpleTriangle::Test2SingleTriangleDrawArray()
 	if (!init)
 	{
 		Renderer* renderer = Renderer::get();
-		GLuint progamId = renderer->GenerateShaderProgram("resources/shaders/base.vert", "resources/shaders/base.frag");
+		GLuint progamId = renderer->GenerateShaderProgram("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag");
 
 		GLuint bufferId = 0;
 		glGenBuffers(1, &bufferId);
@@ -111,7 +111,7 @@ void TestSimpleTriangle::Test3TwoTriangleDrawArray()
 	if (!init)
 	{
 		Renderer* renderer = Renderer::get();
-		GLuint progamId = renderer->GenerateShaderProgram("resources/shaders/base.vert", "resources/shaders/base.frag");
+		GLuint progamId = renderer->GenerateShaderProgram("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag");
 
 		GLuint bufferId = 0;
 		glGenBuffers(1, &bufferId);
@@ -159,7 +159,7 @@ void TestSimpleTriangle::Test4TwoTriangleDrawElements()
 	if (!init)
 	{
 		Renderer* renderer = Renderer::get();
-		GLuint progamId = renderer->GenerateShaderProgram("resources/shaders/base.vert", "resources/shaders/base.frag");
+		GLuint progamId = renderer->GenerateShaderProgram("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag");
 
 		GLfloat z_value = 0.5f;
 		std::vector<GLfloat> vertexArray =
@@ -216,7 +216,7 @@ void TestSimpleTriangle::Test4ChangeVertexDepth()
 		);
 #endif
 		Renderer* renderer = Renderer::get();
-		GLuint progamId = renderer->GenerateShaderProgram("resources/shaders/base.vert", "resources/shaders/base.frag");
+		GLuint progamId = renderer->GenerateShaderProgram("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag");
 
 		GLfloat z_value1 = 1.0f;
 		GLfloat z_value2 = 0.0f;
@@ -285,13 +285,41 @@ void TestSimpleTriangle::Test4ChangeVertexDepth()
 
 }
 
+#include "renderer\model.h"
+void TestSimpleTriangle::Test5Model()
+{
+	static bool init = false;
+	static Model *model = 0;
+	if (!init)
+	{
+		GLfloat z_value = 0.5f;
+		std::vector<GLfloat> vertexArray =
+		{
+			+0.0f, +1.0f, z_value,
+			+1.0f, -1.0f, z_value,
+			-1.0f, -1.0f, z_value,
+		};
+
+		model = new Model(vertexArray);
+
+		init = true;
+	}
+
+	glClearColor(0.3f, 0.1f, 0.3f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	model->Render();
+
+}
+
 bool TestSimpleTriangle::Render()
 {
 	//Test1SingleTriangleDrawArrayNoShader();
 	//Test2SingleTriangleDrawArray();
 	//Test3TwoTriangleDrawArray();
 	//Test4TwoTriangleDrawElements();
-	Test4ChangeVertexDepth();
+	//Test4ChangeVertexDepth();
+	Test5Model();
 
 	return true;
 }

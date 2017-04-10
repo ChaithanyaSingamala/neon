@@ -1,5 +1,5 @@
 #pragma once
-#include "glad\glad.h"
+#include "opengl_header.h"
 #include <vector>
 class Renderer
 {

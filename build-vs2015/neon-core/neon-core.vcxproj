@@ -138,6 +138,9 @@
     <ClInclude Include="..\..\neon\core\glad\khrplatform.h" />
     <ClInclude Include="..\..\neon\core\interface\glfw_interface.h" />
     <ClInclude Include="..\..\neon\core\interface\neon_interface.h" />
+    <ClInclude Include="..\..\neon\core\renderer\model.h" />
+    <ClInclude Include="..\..\neon\core\renderer\model_manager.h" />
+    <ClInclude Include="..\..\neon\core\renderer\opengl_header.h" />
     <ClInclude Include="..\..\neon\core\renderer\renderer.h" />
   </ItemGroup>
   <ItemGroup>
@@ -147,9 +150,12 @@
     <ClCompile Include="..\..\neon\core\glad\glad.c" />
     <ClCompile Include="..\..\neon\core\interface\glfw_interface.cpp" />
     <ClCompile Include="..\..\neon\core\interface\neon_interface.cpp" />
+    <ClCompile Include="..\..\neon\core\renderer\model.cpp" />
+    <ClCompile Include="..\..\neon\core\renderer\model_manager.cpp" />
     <ClCompile Include="..\..\neon\core\renderer\renderer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="..\..\neon\core\renderer\note_glsl_version_details.txt" />
     <Text Include="..\..\neon\readme.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
