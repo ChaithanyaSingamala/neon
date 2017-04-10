@@ -19,6 +19,18 @@ void Model::CreateVBO(GLushort _location, std::vector<GLfloat> _data)
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
 
+void Model::CreateIBO(std::vector<GLushort> _data)
+{
+	GLuint vbo = 0;
+	glGenBuffers(1, &vbo);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, vbo);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, _data.size() * sizeof(GLushort), _data.data(), GL_STATIC_DRAW);
+	vbos.push_back(vbo);
+	//if unbinding, crash happening do we need to unbind index buffer???
+	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+
+}
+
 void Model::BindVAO()
 {
 	glBindVertexArray(voaId);
@@ -37,6 +49,16 @@ Model::Model(std::vector<GLfloat> _vertexData)
 	UnbindVAO();
 }
 
+Model::Model(std::vector<GLfloat> _vertexData, std::vector<GLushort> _indices)
+{
+	vertexCount = _indices.size();
+	CreateVAO();
+	CreateVBO(0, _vertexData);
+	CreateIBO(_indices);
+	UnbindVAO();
+	usingIndexBuffer = true;
+}
+
 Model::~Model()
 {
 	glDeleteVertexArrays(1, &voaId);
@@ -46,6 +68,9 @@ Model::~Model()
 void Model::Render()
 {
 	BindVAO();
-	glDrawArrays(GL_TRIANGLES, 0, vertexCount);
+	if (usingIndexBuffer)
+		glDrawElements(GL_TRIANGLES, vertexCount, GL_UNSIGNED_SHORT, 0);
+	else
+		glDrawArrays(GL_TRIANGLES, 0, vertexCount);
 	UnbindVAO();
 }

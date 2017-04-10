@@ -9,6 +9,7 @@ class TestSimpleTriangle : public Application
 	void Test4TwoTriangleDrawElements();
 	void Test4ChangeVertexDepth();
 	void Test5Model();
+	void Test6ModelDrawElement();
 
 public:
 	bool Init();

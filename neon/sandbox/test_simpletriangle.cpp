@@ -312,6 +312,37 @@ void TestSimpleTriangle::Test5Model()
 
 }
 
+void TestSimpleTriangle::Test6ModelDrawElement()
+{
+	static bool init = false;
+	static Model *model = 0;
+	if (!init)
+	{
+		GLfloat z_value = 0.5f;
+		std::vector<GLfloat> vertexArray =
+		{
+			//0
+			+0.0f, +1.0f, z_value,
+			//1
+			+1.0f, +0.0f, z_value,
+			//2
+			-1.0f, +0.0f, z_value,
+			//3
+			+0.0f, -1.0f, z_value,
+		};
+		std::vector<GLushort> indices = { 0,1,2, 3,1,2 };
+
+		model = new Model(vertexArray, indices);
+
+		init = true;
+	}
+
+	glClearColor(0.3f, 0.1f, 0.3f, 1.0f);
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+	model->Render();
+}
+
 bool TestSimpleTriangle::Render()
 {
 	//Test1SingleTriangleDrawArrayNoShader();
@@ -319,7 +350,8 @@ bool TestSimpleTriangle::Render()
 	//Test3TwoTriangleDrawArray();
 	//Test4TwoTriangleDrawElements();
 	//Test4ChangeVertexDepth();
-	Test5Model();
+	//Test5Model();
+	Test6ModelDrawElement();
 
 	return true;
 }
