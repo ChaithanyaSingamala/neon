@@ -18,11 +18,11 @@ Engine::~Engine()
 void Engine::Loop()
 {
 	neonInterface = NeonInterface::get();
+	renderer = Renderer::get();
 	application = Application::RegisterApplication();
 	if (!application)
 		ASSERT("no application to run");
 	application->Init();
-	renderer = Renderer::get();
 	while (!isExit)
 	{
 		application->Update();

@@ -16,12 +16,14 @@
     <ClInclude Include="..\..\neon\core\engine\application.h">
       <Filter>engine</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\neon\core\renderer\renderer.h" />
     <ClInclude Include="..\..\neon\core\glad\glad.h">
       <Filter>glad</Filter>
     </ClInclude>
     <ClInclude Include="..\..\neon\core\glad\khrplatform.h">
       <Filter>glad</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\neon\core\renderer\renderer.h">
+      <Filter>renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -40,9 +42,11 @@
     <ClCompile Include="..\..\neon\core\engine\main.cpp">
       <Filter>engine</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\neon\core\renderer\renderer.cpp" />
     <ClCompile Include="..\..\neon\core\glad\glad.c">
       <Filter>glad</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\neon\core\renderer\renderer.cpp">
+      <Filter>renderer</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

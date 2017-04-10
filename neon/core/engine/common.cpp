@@ -2,6 +2,7 @@
 #include <assert.h>
 #include <iostream>
 #include <vector>
+#include <fstream>
 #include "engine.h"
 
 Common::Common()
@@ -34,4 +35,13 @@ std::string GetFromCommandOption(std::string _for_value)
 		}
 	}
 	return resultStr;
+}
+
+std::string ReadFromFile(std::string _filename)
+{
+	std::ifstream file(_filename);
+	if (!file.good())
+		ASSERT("fail to open file");
+
+	return std::string(std::istreambuf_iterator<char>(file), std::istreambuf_iterator<char>());
 }
