@@ -16,14 +16,20 @@ bool TestSimpleTriangle::Init()
 	std::vector<GLfloat> vertexArray =
 	{
 		+0.0f, +1.0f, z_value,
+		+1.0f, +0.0f, +0.0,
 		+1.0f, -1.0f, z_value,
-		-1.0f, -1.0f, z_value
+		+0.0f, +0.0f, +1.0,
+		-1.0f, -1.0f, z_value,
+		+0.0f, +1.0f, +0.0
 	};
-	glBufferData(GL_ARRAY_BUFFER, vertexArray.size() * sizeof(GL_FLOAT), vertexArray.data(), GL_STATIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, vertexArray.size() * sizeof(GLfloat), vertexArray.data(), GL_STATIC_DRAW);
 
 	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);
+
+	glEnableVertexAttribArray(1);
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (const void *)(3 * sizeof(GLfloat)));
+
 	return true;
 }
 
