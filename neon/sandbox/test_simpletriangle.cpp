@@ -3,6 +3,7 @@
 #include "renderer\renderer.h"
 #include <vector>
 #include "interface\neon_interface.h"
+#include "renderer\shader.h"
 #ifdef _MSC_VER
 #include <Windows.h>
 #endif
@@ -71,7 +72,10 @@ void TestSimpleTriangle::Test2SingleTriangleDrawArray()
 	if (!init)
 	{
 		Renderer* renderer = Renderer::get();
-		GLuint progamId = renderer->GenerateShaderProgram("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag");
+		Shader *shader = new Shader("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag");
+		shader->Bind();
+		shader->BindAttributeLocation("vertexPosition", 0);
+		shader->BindAttributeLocation("vertexColor", 1);
 
 		GLuint bufferId = 0;
 		glGenBuffers(1, &bufferId);
@@ -111,7 +115,10 @@ void TestSimpleTriangle::Test3TwoTriangleDrawArray()
 	if (!init)
 	{
 		Renderer* renderer = Renderer::get();
-		GLuint progamId = renderer->GenerateShaderProgram("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag");
+		Shader *shader = new Shader("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag");
+		shader->Bind();
+		shader->BindAttributeLocation("vertexPosition", 0);
+		shader->BindAttributeLocation("vertexColor", 1);
 
 		GLuint bufferId = 0;
 		glGenBuffers(1, &bufferId);
@@ -159,7 +166,10 @@ void TestSimpleTriangle::Test4TwoTriangleDrawElements()
 	if (!init)
 	{
 		Renderer* renderer = Renderer::get();
-		GLuint progamId = renderer->GenerateShaderProgram("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag");
+		Shader *shader = new Shader("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag");
+		shader->Bind();
+		shader->BindAttributeLocation("vertexPosition", 0);
+		shader->BindAttributeLocation("vertexColor", 1);
 
 		GLfloat z_value = 0.5f;
 		std::vector<GLfloat> vertexArray =
@@ -216,7 +226,10 @@ void TestSimpleTriangle::Test4ChangeVertexDepth()
 		);
 #endif
 		Renderer* renderer = Renderer::get();
-		GLuint progamId = renderer->GenerateShaderProgram("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag");
+		Shader *shader = new Shader("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag");
+		shader->Bind();
+		shader->BindAttributeLocation("vertexPosition", 0);
+		shader->BindAttributeLocation("vertexColor", 1);
 
 		GLfloat z_value1 = 1.0f;
 		GLfloat z_value2 = 0.0f;
@@ -348,10 +361,10 @@ bool TestSimpleTriangle::Render()
 	//Test1SingleTriangleDrawArrayNoShader();
 	//Test2SingleTriangleDrawArray();
 	//Test3TwoTriangleDrawArray();
-	//Test4TwoTriangleDrawElements();
+	Test4TwoTriangleDrawElements();
 	//Test4ChangeVertexDepth();
 	//Test5Model();
-	Test6ModelDrawElement();
+	//Test6ModelDrawElement();
 
 	return true;
 }

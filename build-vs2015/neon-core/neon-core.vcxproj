@@ -142,6 +142,7 @@
     <ClInclude Include="..\..\neon\core\renderer\model_manager.h" />
     <ClInclude Include="..\..\neon\core\renderer\opengl_header.h" />
     <ClInclude Include="..\..\neon\core\renderer\renderer.h" />
+    <ClInclude Include="..\..\neon\core\renderer\shader.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\neon\core\engine\common.cpp" />
@@ -153,6 +154,7 @@
     <ClCompile Include="..\..\neon\core\renderer\model.cpp" />
     <ClCompile Include="..\..\neon\core\renderer\model_manager.cpp" />
     <ClCompile Include="..\..\neon\core\renderer\renderer.cpp" />
+    <ClCompile Include="..\..\neon\core\renderer\shader.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\neon\core\renderer\note_glsl_version_details.txt" />

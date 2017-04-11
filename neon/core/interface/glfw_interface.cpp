@@ -75,8 +75,10 @@ bool GLFWInterface::Update()
 	double currentTime = glfwGetTime();
 	nbFrames++;
 	if (currentTime - lastTime >= 1.0) 
-	{ 								
-		printf("%d fps\n", nbFrames);
+	{ 	
+		char str[100];
+		sprintf_s(str, "%s fps:%d", title.c_str(), nbFrames);
+		glfwSetWindowTitle(window, str);
 		nbFrames = 0;
 		lastTime += 1.0;
 	}
