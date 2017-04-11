@@ -45,7 +45,7 @@ Shader::Shader(std::string _vertexShaderFile, std::string _fragmentShaderFile, S
 
 Shader::~Shader()
 {
-	UnBind();
+	Reset();
 	glDetachShader(programId, vertShaderId);
 	glDetachShader(programId, fragShaderId);
 	glDeleteShader(vertShaderId);
@@ -56,12 +56,20 @@ Shader::~Shader()
 	fragShaderId = 0;
 }
 
-void Shader::Bind()
+void Shader::UpdateUniform(std::string _uniform, GLint value)
+{
+	GLint locPlusOne = uniformInfos[_uniform.c_str()];
+	if(locPlusOne == 0)
+		locPlusOne = uniformInfos[_uniform.c_str()] = glGetUniformLocation(programId, _uniform.c_str()) + 1;
+	glUniform1i(locPlusOne - 1, value);
+}
+
+void Shader::Set()
 {
 	glUseProgram(programId);
 }
 
-void Shader::UnBind()
+void Shader::Reset()
 {
 	glUseProgram(0);
 }

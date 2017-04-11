@@ -1,8 +1,8 @@
 #version 140
 
 in vec3 vertexPosition;
-in vec3 vertexColor;
 in vec2 vertexUV;
+in vec3 vertexColor;
 
 out vec3 vColor;
 out vec2 vUV;

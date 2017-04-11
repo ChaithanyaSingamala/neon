@@ -3,7 +3,7 @@
 #include "renderer\renderer.h"
 #include "renderer\model.h"
 #include "renderer\shader.h"
-#include "SOIL.h"
+#include "renderer\texture.h"
 
 bool TestTextureTriangle::Init()
 {
@@ -25,39 +25,29 @@ bool TestTextureTriangle::Render()
 	return true;
 }
 
-void LoadTexture(std::string _filename)
-{
-	int width, height;
-	unsigned char* image;
-	image = SOIL_load_image(_filename.c_str(), &width, &height, 0, SOIL_LOAD_RGB);
-	GLuint texture;
-	glGenTextures(1, &texture);
-	glBindTexture(GL_TEXTURE_2D, texture);
-	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-	SOIL_free_image_data(image);
-	
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-}
 
 void TestTextureTriangle::Test1TextureTriangle()
 {
 	static bool init = false;
-	ShaderAttribInfo infos = {
-		{ "vertexPosition", VERT_POS_LOC },
-		{ "vertexUV", VERT_UV0_LOC },
-		{ "vertexColor", VERT_COLOR_LOC },
-	};
-	Shader *shader = new Shader("resources/shaders/v140/simpletexture.vert", "resources/shaders/v140/simpletexture.frag", infos);
-
-	shader->Bind();
-	LoadTexture("resources/textures/texture_4.png");
-
 	static Model *model = 0;
 	if (!init)
 	{
+
+		ShaderAttribInfo infos = {
+			{ "vertexPosition", VERT_POS_LOC },
+			{ "vertexUV", VERT_UV0_LOC },
+			{ "vertexColor", VERT_COLOR_LOC },
+		};
+		Texture *texture1 = new Texture("resources/textures/texture_4.png");
+		Texture *texture2 = new Texture("resources/textures/checks.png");
+		Shader *shader = new Shader("resources/shaders/v140/simpletexture.vert", "resources/shaders/v140/simple_multitexture.frag", infos);
+		shader->Set(); 
+
+		texture1->Bind(0);
+		texture2->Bind(1);
+		shader->UpdateUniform("Texture1", 0);
+		shader->UpdateUniform("Texture2", 1);
+
 		std::vector<GLfloat> vertexArray =
 		{
 			//  Position				Color					Texcoords

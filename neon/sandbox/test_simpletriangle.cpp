@@ -77,7 +77,7 @@ void TestSimpleTriangle::Test2SingleTriangleDrawArray()
 			{ "vertexColor", VERT_COLOR_LOC },
 		};
 		Shader *shader = new Shader("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag", infos);
-		shader->Bind();
+		shader->Set();
 
 		GLuint bufferId = 0;
 		glGenBuffers(1, &bufferId);
@@ -122,7 +122,7 @@ void TestSimpleTriangle::Test3TwoTriangleDrawArray()
 			{ "vertexColor", VERT_COLOR_LOC },
 		};
 		Shader *shader = new Shader("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag", infos);
-		shader->Bind();
+		shader->Set();
 
 		GLuint bufferId = 0;
 		glGenBuffers(1, &bufferId);
@@ -175,7 +175,7 @@ void TestSimpleTriangle::Test4TwoTriangleDrawElements()
 			{ "vertexColor", VERT_COLOR_LOC },
 		};
 		Shader *shader = new Shader("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag", infos);
-		shader->Bind();
+		shader->Set();
 
 		GLfloat z_value = 0.5f;
 		std::vector<GLfloat> vertexArray =
@@ -237,7 +237,7 @@ void TestSimpleTriangle::Test4ChangeVertexDepth()
 			{ "vertexColor", VERT_COLOR_LOC },
 		};
 		Shader *shader = new Shader("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag", infos);
-		shader->Bind();
+		shader->Set();
 
 
 		GLfloat z_value1 = 1.0f;
