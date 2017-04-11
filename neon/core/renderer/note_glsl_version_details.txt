@@ -14,3 +14,19 @@ GLSL Version	OpenGL Version					Date								Shader Preprocessor
 4.30.8[10]			4.3							August 2012								#version 430
 4.40[11]			4.4							July 2013								#version 440
 4.50[12]			4.5							August 2014								#version 450
+
+OpenGL ES 1.0 is drawn up against the OpenGL 1.3 specification, 
+
+OpenGL ES 1.1 is defined relative to the OpenGL 1.5 specification
+
+OpenGL ES 2.0 is defined relative to the OpenGL 2.0 specification
+
+Need to understand OpenGL ES SL version numbers
+
+For now,
+OpenGL ES 3.x will suppport layout, location, in, out keyword
+		#version 300 es
+
+OpenGL ES 2.x will follow #version 120 syntax, no need to specfiy anything of version
+
+

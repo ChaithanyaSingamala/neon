@@ -72,10 +72,12 @@ void TestSimpleTriangle::Test2SingleTriangleDrawArray()
 	if (!init)
 	{
 		Renderer* renderer = Renderer::get();
-		Shader *shader = new Shader("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag");
+		ShaderAttribInfo infos = {
+			{ "vertexPosition", VERT_POS_LOC },
+			{ "vertexColor", VERT_COLOR_LOC },
+		};
+		Shader *shader = new Shader("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag", infos);
 		shader->Bind();
-		shader->BindAttributeLocation("vertexPosition", 0);
-		shader->BindAttributeLocation("vertexColor", 1);
 
 		GLuint bufferId = 0;
 		glGenBuffers(1, &bufferId);
@@ -93,11 +95,11 @@ void TestSimpleTriangle::Test2SingleTriangleDrawArray()
 		};
 		glBufferData(GL_ARRAY_BUFFER, vertexArray.size() * sizeof(GLfloat), vertexArray.data(), GL_STATIC_DRAW);
 
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);
+		glEnableVertexAttribArray(VERT_POS_LOC);
+		glVertexAttribPointer(VERT_POS_LOC, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);
 
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (const void *)(3 * sizeof(GLfloat)));
+		glEnableVertexAttribArray(VERT_COLOR_LOC);
+		glVertexAttribPointer(VERT_COLOR_LOC, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (const void *)(3 * sizeof(GLfloat)));
 
 		init = true;
 	}
@@ -115,10 +117,12 @@ void TestSimpleTriangle::Test3TwoTriangleDrawArray()
 	if (!init)
 	{
 		Renderer* renderer = Renderer::get();
-		Shader *shader = new Shader("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag");
+		ShaderAttribInfo infos = {
+			{ "vertexPosition", VERT_POS_LOC },
+			{ "vertexColor", VERT_COLOR_LOC },
+		};
+		Shader *shader = new Shader("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag", infos);
 		shader->Bind();
-		shader->BindAttributeLocation("vertexPosition", 0);
-		shader->BindAttributeLocation("vertexColor", 1);
 
 		GLuint bufferId = 0;
 		glGenBuffers(1, &bufferId);
@@ -144,11 +148,11 @@ void TestSimpleTriangle::Test3TwoTriangleDrawArray()
 		};
 		glBufferData(GL_ARRAY_BUFFER, vertexArray.size() * sizeof(GLfloat), vertexArray.data(), GL_STATIC_DRAW);
 
-		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);
+		glEnableVertexAttribArray(VERT_POS_LOC);
+		glVertexAttribPointer(VERT_POS_LOC, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);
 
-		glEnableVertexAttribArray(1);
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (const void *)(3 * sizeof(GLfloat)));
+		glEnableVertexAttribArray(VERT_COLOR_LOC);
+		glVertexAttribPointer(VERT_COLOR_LOC, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (const void *)(3 * sizeof(GLfloat)));
 
 		init = true;
 	}
@@ -166,10 +170,12 @@ void TestSimpleTriangle::Test4TwoTriangleDrawElements()
 	if (!init)
 	{
 		Renderer* renderer = Renderer::get();
-		Shader *shader = new Shader("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag");
+		ShaderAttribInfo infos = {
+			{ "vertexPosition", VERT_POS_LOC },
+			{ "vertexColor", VERT_COLOR_LOC },
+		};
+		Shader *shader = new Shader("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag", infos);
 		shader->Bind();
-		shader->BindAttributeLocation("vertexPosition", 0);
-		shader->BindAttributeLocation("vertexColor", 1);
 
 		GLfloat z_value = 0.5f;
 		std::vector<GLfloat> vertexArray =
@@ -193,10 +199,10 @@ void TestSimpleTriangle::Test4TwoTriangleDrawElements()
 		glGenBuffers(1, &vertBufferId);
 		glBindBuffer(GL_ARRAY_BUFFER, vertBufferId);
 		glBufferData(GL_ARRAY_BUFFER, vertexArray.size() * sizeof(GLfloat), vertexArray.data(), GL_STATIC_DRAW);
-		glEnableVertexAttribArray(0); //vertex position
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);
-		glEnableVertexAttribArray(1); //vertex color
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (const void *)(3 * sizeof(GLfloat)));
+		glEnableVertexAttribArray(VERT_POS_LOC); //vertex position
+		glVertexAttribPointer(VERT_POS_LOC, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);
+		glEnableVertexAttribArray(VERT_COLOR_LOC); //vertex color
+		glVertexAttribPointer(VERT_COLOR_LOC, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (const void *)(3 * sizeof(GLfloat)));
 
 		GLuint indexBufferId = 0;
 		glGenBuffers(1, &indexBufferId);
@@ -226,10 +232,13 @@ void TestSimpleTriangle::Test4ChangeVertexDepth()
 		);
 #endif
 		Renderer* renderer = Renderer::get();
-		Shader *shader = new Shader("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag");
+		ShaderAttribInfo infos = {
+			{ "vertexPosition", VERT_POS_LOC },
+			{ "vertexColor", VERT_COLOR_LOC },
+		};
+		Shader *shader = new Shader("resources/shaders/v140/base.vert", "resources/shaders/v140/base.frag", infos);
 		shader->Bind();
-		shader->BindAttributeLocation("vertexPosition", 0);
-		shader->BindAttributeLocation("vertexColor", 1);
+
 
 		GLfloat z_value1 = 1.0f;
 		GLfloat z_value2 = 0.0f;
@@ -271,10 +280,10 @@ void TestSimpleTriangle::Test4ChangeVertexDepth()
 		glGenBuffers(1, &vertBufferId);
 		glBindBuffer(GL_ARRAY_BUFFER, vertBufferId);
 		glBufferData(GL_ARRAY_BUFFER, vertexArray.size() * sizeof(GLfloat), vertexArray.data(), GL_STATIC_DRAW);
-		glEnableVertexAttribArray(0); //vertex position
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);
-		glEnableVertexAttribArray(1); //vertex color
-		glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (const void *)(3 * sizeof(GLfloat)));
+		glEnableVertexAttribArray(VERT_POS_LOC); //vertex position
+		glVertexAttribPointer(VERT_POS_LOC, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), 0);
+		glEnableVertexAttribArray(VERT_COLOR_LOC); //vertex color
+		glVertexAttribPointer(VERT_COLOR_LOC, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(GLfloat), (const void *)(3 * sizeof(GLfloat)));
 
 		GLuint indexBufferId = 0;
 		glGenBuffers(1, &indexBufferId);

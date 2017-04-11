@@ -2,15 +2,15 @@
 #include "opengl_header.h"
 #include <vector>
 
-struct AttributeInfo
+struct VertexAttributeInfo
 {
 	GLboolean isSet = GL_FALSE;
 	GLubyte locationId = 0;
 	GLubyte start = 0;
 	GLubyte offset = 0;
 	GLubyte size = 0;
-	AttributeInfo() {}
-	AttributeInfo(GLboolean _isSet, GLubyte _locationId, GLubyte _start, GLubyte _offset, GLubyte _size):
+	VertexAttributeInfo() {}
+	VertexAttributeInfo(GLboolean _isSet, GLubyte _locationId, GLubyte _start, GLubyte _offset, GLubyte _size):
 		isSet(_isSet),
 		locationId(_locationId),
 		start(_start),
@@ -21,10 +21,10 @@ struct AttributeInfo
 class ModelDataLayout
 {
 public:
-	AttributeInfo position;
-	AttributeInfo color;
-	AttributeInfo uv;
-	AttributeInfo normal;
+	VertexAttributeInfo position;
+	VertexAttributeInfo color;
+	VertexAttributeInfo uv;
+	VertexAttributeInfo normal;
 };
 
 class Model
@@ -38,6 +38,7 @@ class Model
 	void CreateVAO();
 	void CreateVBO(std::vector<GLfloat> _data, ModelDataLayout _layout);
 	void CreateIBO(std::vector<GLushort> _data);
+	void SetVertexAttribute(VertexAttributeInfo _info);
 	void BindVAO();
 	void UnbindVAO();
 

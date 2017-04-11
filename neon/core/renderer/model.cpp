@@ -14,29 +14,13 @@ void Model::CreateVBO(std::vector<GLfloat> _data, ModelDataLayout _layout)
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, _data.size() * sizeof(GLfloat), _data.data(), GL_STATIC_DRAW);
 	if (_layout.position.isSet)
-	{
-		AttributeInfo info = _layout.position;
-		glEnableVertexAttribArray(info.locationId);
-		glVertexAttribPointer(info.locationId, info.size, GL_FLOAT, GL_FALSE, info.offset * sizeof(GLfloat), (void *)(info.start * sizeof(GLfloat)));
-	}
+		SetVertexAttribute(_layout.position);
 	if (_layout.color.isSet)
-	{
-		AttributeInfo info = _layout.color;
-		glEnableVertexAttribArray(info.locationId);
-		glVertexAttribPointer(info.locationId, info.size, GL_FLOAT, GL_FALSE, info.offset * sizeof(GLfloat), (const void *)(info.start * sizeof(GLfloat)));
-	}
+		SetVertexAttribute(_layout.color);
 	if (_layout.uv.isSet)
-	{
-		AttributeInfo info = _layout.uv;
-		glEnableVertexAttribArray(info.locationId);
-		glVertexAttribPointer(info.locationId, info.size, GL_FLOAT, GL_FALSE, info.offset * sizeof(GLfloat), (void *)(info.start * sizeof(GLfloat)));
-	}
+		SetVertexAttribute(_layout.uv);
 	if (_layout.normal.isSet)
-	{
-		AttributeInfo info = _layout.normal;
-		glEnableVertexAttribArray(info.locationId);
-		glVertexAttribPointer(info.locationId, info.size, GL_FLOAT, GL_FALSE, info.offset * sizeof(GLfloat), (void *)(info.start * sizeof(GLfloat)));
-	}
+		SetVertexAttribute(_layout.normal);
 	vbos.push_back(vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
@@ -51,6 +35,12 @@ void Model::CreateIBO(std::vector<GLushort> _data)
 	//if unbinding, crash happening do we need to unbind index buffer???
 	//glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 
+}
+
+void Model::SetVertexAttribute(VertexAttributeInfo _info)
+{
+	glEnableVertexAttribArray(_info.locationId);
+	glVertexAttribPointer(_info.locationId, _info.size, GL_FLOAT, GL_FALSE, _info.offset * sizeof(GLfloat), (void *)(_info.start * sizeof(GLfloat)));
 }
 
 void Model::BindVAO()

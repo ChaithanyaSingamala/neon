@@ -13,6 +13,29 @@ Shader::Shader(std::string _vertexShaderFile, std::string _fragmentShaderFile)
 	programId = glCreateProgram();
 	glAttachShader(programId, vertShaderId);
 	glAttachShader(programId, fragShaderId);
+
+	glLinkProgram(programId);
+
+	if (!CheckStatus(programId, glGetProgramiv, glGetProgramInfoLog, GL_LINK_STATUS))
+		ASSERT("failed to compile shader");
+
+}
+
+Shader::Shader(std::string _vertexShaderFile, std::string _fragmentShaderFile, ShaderAttribInfo vertexAttributeLocs)
+{
+	std::string vertShaderCode = ReadFromFile(_vertexShaderFile);
+	std::string fragShaderCode = ReadFromFile(_fragmentShaderFile);
+
+	vertShaderId = CompileShaderCode(vertShaderCode.c_str(), GL_VERTEX_SHADER);
+	fragShaderId = CompileShaderCode(fragShaderCode.c_str(), GL_FRAGMENT_SHADER);
+
+	programId = glCreateProgram();
+	glAttachShader(programId, vertShaderId);
+	glAttachShader(programId, fragShaderId);
+
+	for (auto info : vertexAttributeLocs)
+		glBindAttribLocation(programId, info.second, info.first.c_str());
+
 	glLinkProgram(programId);
 
 	if (!CheckStatus(programId, glGetProgramiv, glGetProgramInfoLog, GL_LINK_STATUS))
@@ -31,11 +54,6 @@ Shader::~Shader()
 	programId = 0;
 	vertShaderId = 0;
 	fragShaderId = 0;
-}
-
-void Shader::BindAttributeLocation(std::string _attributeName, GLuint _location)
-{
-	glBindAttribLocation(programId, _location, _attributeName.c_str());
 }
 
 void Shader::Bind()

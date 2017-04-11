@@ -45,11 +45,14 @@ void LoadTexture(std::string _filename)
 void TestTextureTriangle::Test1TextureTriangle()
 {
 	static bool init = false;
-	Shader *shader = new Shader("resources/shaders/v140/simpletexture.vert", "resources/shaders/v140/simpletexture.frag");
-	shader->Bind();
-	shader->BindAttributeLocation("vertexPosition", 0);
-	shader->BindAttributeLocation("vertexColor", 1);
+	ShaderAttribInfo infos = {
+		{ "vertexPosition", VERT_POS_LOC },
+		{ "vertexUV", VERT_UV0_LOC },
+		{ "vertexColor", VERT_COLOR_LOC },
+	};
+	Shader *shader = new Shader("resources/shaders/v140/simpletexture.vert", "resources/shaders/v140/simpletexture.frag", infos);
 
+	shader->Bind();
 	LoadTexture("resources/textures/texture_4.png");
 
 	static Model *model = 0;
@@ -65,9 +68,9 @@ void TestTextureTriangle::Test1TextureTriangle()
 		};
 		std::vector<GLushort> indices = { 0, 1, 2,  2, 3, 0 };
 		ModelDataLayout layout;
-		layout.position =	{ GL_TRUE, 0, 0, 8, 3 };
-		layout.color =		{ GL_TRUE, 1, 3, 8, 3 };
-		layout.uv =			{ GL_TRUE, 2, 6, 8, 2 };
+		layout.position =	{ GL_TRUE, VERT_POS_LOC, 0, 8, 3 };
+		layout.color =		{ GL_TRUE, VERT_COLOR_LOC, 3, 8, 3 };
+		layout.uv =			{ GL_TRUE, VERT_UV0_LOC, 6, 8, 2 };
 		model = new Model(vertexArray, indices, layout);
 
 		init = true;
