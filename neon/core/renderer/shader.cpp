@@ -56,12 +56,17 @@ Shader::~Shader()
 	fragShaderId = 0;
 }
 
-void Shader::UpdateUniform(std::string _uniform, GLint value)
+GLint Shader::GetUniformLocation(std::string _uniform)
 {
 	GLint locPlusOne = uniformInfos[_uniform.c_str()];
-	if(locPlusOne == 0)
+	if (locPlusOne == 0)
 		locPlusOne = uniformInfos[_uniform.c_str()] = glGetUniformLocation(programId, _uniform.c_str()) + 1;
-	glUniform1i(locPlusOne - 1, value);
+	return locPlusOne - 1;
+}
+
+void Shader::UpdateUniform(std::string _uniform, GLint value)
+{
+	glUniform1i(GetUniformLocation(_uniform), value);
 }
 
 void Shader::Set()

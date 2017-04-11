@@ -56,6 +56,30 @@ std::vector<std::string> Engine::GetCommandLineArguments()
 	return commandLineArguments;
 }
 
+void Engine::HandleKeyInputs(int key, int action)
+{
+	if (application)
+		application->HandleKeyInput(key, action);
+}
+
+void Engine::HandleMouseScrollInputs(double xoffset, double yoffset)
+{
+	if (application)
+		application->HandleKeyInput(xoffset, yoffset);
+}
+
+void Engine::HandleMouseCursorInputs(double xpos, double ypos)
+{
+	if (application)
+		application->HandleKeyInput(xpos, ypos);
+}
+
+void Engine::HandleMouseButtonInputs(int button, int action)
+{
+	if (application)
+		application->HandleMouseButtonInputs(button, action);
+}
+
 Engine *Engine::get()
 {
 	if (!engine)

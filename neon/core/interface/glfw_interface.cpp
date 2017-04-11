@@ -21,6 +21,27 @@ void WindowSizeUpdated(GLFWwindow *window, int newwidth, int newheight)
 	Engine::get()->InterfaceWindowSizeUpdated(newwidth, newheight);
 }
 
+void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+{
+	//if (key == GLFW_KEY_E && action == GLFW_PRESS);
+	Engine::get()->HandleKeyInputs(key, action);
+}
+void cursor_pos_callback(GLFWwindow* window, double xpos, double ypos)
+{
+	Engine::get()->HandleMouseCursorInputs(xpos, ypos);
+}
+
+void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+{
+	//if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS);
+	Engine::get()->HandleMouseButtonInputs(button, action);
+}
+
+void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+{
+	Engine::get()->HandleMouseScrollInputs(xoffset, yoffset);
+}
+
 bool GLFWInterface::Init()
 {
 	std::string windowOptStr = "";
@@ -48,6 +69,11 @@ bool GLFWInterface::Init()
 	}
 
 	glfwSetWindowSizeCallback(window, WindowSizeUpdated);
+
+	glfwSetKeyCallback(window, key_callback);
+	glfwSetCursorPosCallback(window, cursor_pos_callback);
+	glfwSetMouseButtonCallback(window, mouse_button_callback);
+	glfwSetScrollCallback(window, scroll_callback);
 
 	std::cout << "created window width=" << width << " height=" << height << std::endl;
 	glfwMakeContextCurrent(window);

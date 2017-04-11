@@ -30,5 +30,10 @@ public:
 
 	void RegisterCommandLineArguments(int argc, char **argv);
 	std::vector<std::string> GetCommandLineArguments();
+
+	void HandleKeyInputs(int key, int action);
+	void HandleMouseScrollInputs(double xoffset, double yoffset);
+	void HandleMouseCursorInputs(double xpos, double ypos);
+	void HandleMouseButtonInputs(int button, int action);
 };
 

@@ -71,3 +71,23 @@ void TestTextureTriangle::Test1TextureTriangle()
 
 	model->Render();
 }
+
+void TestTextureTriangle::HandleKeyInput(int key, int action)
+{
+	//std::cout << "key " << key << " " << action << " " << std::endl;
+}
+
+void TestTextureTriangle::HandleMouseButtonInputs(int button, int action)
+{
+	//std::cout << "mouse button " << button << " " << action << " " << std::endl;
+}
+
+void TestTextureTriangle::HandleMouseScrollInputs(double xoffset, double yoffset)
+{
+	//std::cout << "mouse scroll " << xoffset << " " << yoffset << " " << std::endl;
+}
+
+void TestTextureTriangle::HandleMouseCursorInputs(double xpos, double ypos)
+{
+	//std::cout << "mouse cursor " << xpos << " " << ypos << " " << std::endl;
+}

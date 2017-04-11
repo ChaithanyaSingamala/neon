@@ -8,4 +8,11 @@ public:
 	bool Update();
 	bool Render();
 	void Test1TextureTriangle();
+
+	void HandleKeyInput(int key, int action) override;
+	virtual void HandleMouseButtonInputs(int button, int action) override;
+	virtual void HandleMouseScrollInputs(double xoffset, double yoffset) override;
+	virtual void HandleMouseCursorInputs(double xpos, double ypos) override;
+
+
 };
