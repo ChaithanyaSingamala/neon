@@ -89,8 +89,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)../neon/core;$(SolutionDir)../neon/external/glfw/include;$(SolutionDir)../neon/external/glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>ENABLE_DEBUG=5;ENABLE_FPS_PRINT=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)../neon/core;$(SolutionDir)../neon/external/glfw/include;$(SolutionDir)../neon/external/glm;$(SolutionDir)../neon/external/soil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>ENABLE_DEBUG=5;ENABLE_FPS_PRINT=1;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -98,8 +98,8 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)../neon/core;$(SolutionDir)../neon/external/glfw/include;$(SolutionDir)../neon/external/glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>ENABLE_DEBUG=5;ENABLE_FPS_PRINT=1;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalIncludeDirectories>$(SolutionDir)../neon/core;$(SolutionDir)../neon/external/glfw/include;$(SolutionDir)../neon/external/glm;$(SolutionDir)../neon/external/soil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>ENABLE_DEBUG=5;ENABLE_FPS_PRINT=1;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -109,7 +109,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)../neon/core;$(SolutionDir)../neon/external/glfw/include;$(SolutionDir)../neon/external/glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../neon/core;$(SolutionDir)../neon/external/glfw/include;$(SolutionDir)../neon/external/glm;$(SolutionDir)../neon/external/soil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -123,7 +124,8 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)../neon/core;$(SolutionDir)../neon/external/glfw/include;$(SolutionDir)../neon/external/glm;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)../neon/core;$(SolutionDir)../neon/external/glfw/include;$(SolutionDir)../neon/external/glm;$(SolutionDir)../neon/external/soil;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
@@ -143,6 +145,12 @@
     <ClInclude Include="..\..\neon\core\renderer\opengl_header.h" />
     <ClInclude Include="..\..\neon\core\renderer\renderer.h" />
     <ClInclude Include="..\..\neon\core\renderer\shader.h" />
+    <ClInclude Include="..\..\neon\external\soil\SOIL.h" />
+    <ClInclude Include="..\..\neon\external\soil\src\image_DXT.h" />
+    <ClInclude Include="..\..\neon\external\soil\src\image_helper.h" />
+    <ClInclude Include="..\..\neon\external\soil\src\stbi_DDS_aug.h" />
+    <ClInclude Include="..\..\neon\external\soil\src\stbi_DDS_aug_c.h" />
+    <ClInclude Include="..\..\neon\external\soil\src\stb_image_aug.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\neon\core\engine\common.cpp" />
@@ -155,6 +163,10 @@
     <ClCompile Include="..\..\neon\core\renderer\model_manager.cpp" />
     <ClCompile Include="..\..\neon\core\renderer\renderer.cpp" />
     <ClCompile Include="..\..\neon\core\renderer\shader.cpp" />
+    <ClCompile Include="..\..\neon\external\soil\src\image_DXT.c" />
+    <ClCompile Include="..\..\neon\external\soil\src\image_helper.c" />
+    <ClCompile Include="..\..\neon\external\soil\src\SOIL.c" />
+    <ClCompile Include="..\..\neon\external\soil\src\stb_image_aug.c" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\..\neon\core\renderer\note_glsl_version_details.txt" />

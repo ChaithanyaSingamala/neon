@@ -37,6 +37,24 @@
     <ClInclude Include="..\..\neon\core\renderer\shader.h">
       <Filter>renderer</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\neon\external\soil\SOIL.h">
+      <Filter>external\soil</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\neon\external\soil\src\stb_image_aug.h">
+      <Filter>external\soil\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\neon\external\soil\src\stbi_DDS_aug.h">
+      <Filter>external\soil\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\neon\external\soil\src\stbi_DDS_aug_c.h">
+      <Filter>external\soil\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\neon\external\soil\src\image_DXT.h">
+      <Filter>external\soil\src</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\neon\external\soil\src\image_helper.h">
+      <Filter>external\soil\src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\neon\core\interface\neon_interface.cpp">
@@ -69,6 +87,18 @@
     <ClCompile Include="..\..\neon\core\renderer\shader.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\neon\external\soil\src\stb_image_aug.c">
+      <Filter>external\soil\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\neon\external\soil\src\image_DXT.c">
+      <Filter>external\soil\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\neon\external\soil\src\image_helper.c">
+      <Filter>external\soil\src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\neon\external\soil\src\SOIL.c">
+      <Filter>external\soil\src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="interface">
@@ -82,6 +112,15 @@
     </Filter>
     <Filter Include="glad">
       <UniqueIdentifier>{b68c5c37-4aa8-42f9-b373-c3bd8a70992e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external">
+      <UniqueIdentifier>{98bf14ec-32dd-47ad-a9c5-8e85519c5e6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\soil">
+      <UniqueIdentifier>{6904be0c-4a9f-4074-889e-c8315b9547c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\soil\src">
+      <UniqueIdentifier>{67e5a14d-3976-4de0-961b-27b0b99dc313}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

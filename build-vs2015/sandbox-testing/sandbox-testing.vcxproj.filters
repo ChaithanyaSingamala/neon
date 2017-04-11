@@ -4,9 +4,11 @@
     <ClCompile Include="..\..\neon\sandbox\test_application.cpp" />
     <ClCompile Include="..\..\neon\sandbox\application.cpp" />
     <ClCompile Include="..\..\neon\sandbox\test_simpletriangle.cpp" />
+    <ClCompile Include="..\..\neon\sandbox\test_texturetriangle.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\neon\sandbox\test_application.h" />
     <ClInclude Include="..\..\neon\sandbox\test_simpletriangle.h" />
+    <ClInclude Include="..\..\neon\sandbox\test_texturetriangle.h" />
   </ItemGroup>
 </Project>

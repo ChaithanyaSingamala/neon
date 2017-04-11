@@ -7,14 +7,36 @@ void Model::CreateVAO()
 	glBindVertexArray(voaId);
 }
 
-void Model::CreateVBO(GLushort _location, std::vector<GLfloat> _data)
+void Model::CreateVBO(std::vector<GLfloat> _data, ModelDataLayout _layout)
 {
 	GLuint vbo = 0;
 	glGenBuffers(1, &vbo);
-	glEnableVertexAttribArray(0);
 	glBindBuffer(GL_ARRAY_BUFFER, vbo);
 	glBufferData(GL_ARRAY_BUFFER, _data.size() * sizeof(GLfloat), _data.data(), GL_STATIC_DRAW);
-	glVertexAttribPointer(_location, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	if (_layout.position.isSet)
+	{
+		AttributeInfo info = _layout.position;
+		glEnableVertexAttribArray(info.locationId);
+		glVertexAttribPointer(info.locationId, info.size, GL_FLOAT, GL_FALSE, info.offset * sizeof(GLfloat), (void *)(info.start * sizeof(GLfloat)));
+	}
+	if (_layout.color.isSet)
+	{
+		AttributeInfo info = _layout.color;
+		glEnableVertexAttribArray(info.locationId);
+		glVertexAttribPointer(info.locationId, info.size, GL_FLOAT, GL_FALSE, info.offset * sizeof(GLfloat), (const void *)(info.start * sizeof(GLfloat)));
+	}
+	if (_layout.uv.isSet)
+	{
+		AttributeInfo info = _layout.uv;
+		glEnableVertexAttribArray(info.locationId);
+		glVertexAttribPointer(info.locationId, info.size, GL_FLOAT, GL_FALSE, info.offset * sizeof(GLfloat), (void *)(info.start * sizeof(GLfloat)));
+	}
+	if (_layout.normal.isSet)
+	{
+		AttributeInfo info = _layout.normal;
+		glEnableVertexAttribArray(info.locationId);
+		glVertexAttribPointer(info.locationId, info.size, GL_FLOAT, GL_FALSE, info.offset * sizeof(GLfloat), (void *)(info.start * sizeof(GLfloat)));
+	}
 	vbos.push_back(vbo);
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
 }
@@ -45,7 +67,9 @@ Model::Model(std::vector<GLfloat> _vertexData)
 {
 	vertexCount = _vertexData.size();
 	CreateVAO();
-	CreateVBO(0, _vertexData);
+	ModelDataLayout layout;
+	layout.position = { GL_TRUE, 0, 0, 0, 3};
+	CreateVBO(_vertexData, layout);
 	UnbindVAO();
 }
 
@@ -53,7 +77,19 @@ Model::Model(std::vector<GLfloat> _vertexData, std::vector<GLushort> _indices)
 {
 	vertexCount = _indices.size();
 	CreateVAO();
-	CreateVBO(0, _vertexData);
+	ModelDataLayout layout;
+	layout.position = {GL_TRUE, 0, 0, 0, 3};
+	CreateVBO(_vertexData, layout);
+	CreateIBO(_indices);
+	UnbindVAO();
+	usingIndexBuffer = true;
+}
+
+Model::Model(std::vector<GLfloat> _vertexData, std::vector<GLushort> _indices, ModelDataLayout _layout)
+{
+	vertexCount = _indices.size();
+	CreateVAO();
+	CreateVBO(_vertexData, _layout);
 	CreateIBO(_indices);
 	UnbindVAO();
 	usingIndexBuffer = true;
