@@ -3,6 +3,20 @@
 #include "../engine/engine.h"
 
 
+void GLFWInterface::CalculateUpdateDeltaTime()
+{
+	static double lastTime = glfwGetTime();
+	double currentTime = glfwGetTime();
+	deltaTime = currentTime - lastTime;
+	lastTime = currentTime;
+
+}
+
+double GLFWInterface::GetDeltaTime()
+{
+	return deltaTime;
+}
+
 GLFWInterface::GLFWInterface()
 {
 

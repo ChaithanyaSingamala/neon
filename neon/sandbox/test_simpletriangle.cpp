@@ -305,6 +305,9 @@ void TestSimpleTriangle::Test4ChangeVertexDepth()
 	glDisable(GL_DEPTH_TEST);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
 
+	glViewport(0, 0, NeonInterface::get()->Width(), NeonInterface::get()->Height());
+
+
 }
 
 #include "renderer\model.h"
@@ -370,10 +373,44 @@ bool TestSimpleTriangle::Render()
 	//Test1SingleTriangleDrawArrayNoShader();
 	//Test2SingleTriangleDrawArray();
 	//Test3TwoTriangleDrawArray();
-	Test4TwoTriangleDrawElements();
+	//Test4TwoTriangleDrawElements();
 	//Test4ChangeVertexDepth();
 	//Test5Model();
 	//Test6ModelDrawElement();
+	switch (testId)
+	{
+	case 0: Test1SingleTriangleDrawArrayNoShader();
+		break;
+	case 1: Test2SingleTriangleDrawArray();
+		break;
+	case 2: Test3TwoTriangleDrawArray();
+		break;
+	case 3: Test4TwoTriangleDrawElements();
+		break;
+	case 4: Test4ChangeVertexDepth();
+		break;
+	case 5: Test5Model();
+		break;
+	case 6: Test6ModelDrawElement();
+		break;
+	default: testId = 0;//not handled set to 0
+		break;
+	}
 
 	return true;
+}
+
+void TestSimpleTriangle::HandleKeyInput(int key, int action)
+{
+	if (action == 1)
+	{
+		switch (key)
+		{
+		case 262: testId++;  //right arrow key
+			break;
+		case 263: testId--; // left arrow key
+			break;
+		}
+	}
+	//std::cout << "key " << key << " " << action << " " << std::endl;
 }

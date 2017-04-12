@@ -3,3 +3,5 @@
 /build-vs2015/neon.VC.db
 /build-vs2015/bin/
 /build-vs2015/temp/
+/binaries/lib-vc2015/win32/Debug/sandbox-testing.ilk
+/binaries/lib-vc2015/win32/Debug/sandbox-testing.pdb

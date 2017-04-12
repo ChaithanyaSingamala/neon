@@ -134,6 +134,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\neon\core\engine\application.h" />
+    <ClInclude Include="..\..\neon\core\engine\camera.h" />
+    <ClInclude Include="..\..\neon\core\engine\camera_base.h" />
     <ClInclude Include="..\..\neon\core\engine\common.h" />
     <ClInclude Include="..\..\neon\core\engine\engine.h" />
     <ClInclude Include="..\..\neon\core\glad\glad.h" />
@@ -154,6 +156,8 @@
     <ClInclude Include="..\..\neon\external\soil\src\stb_image_aug.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\neon\core\engine\camera.cpp" />
+    <ClCompile Include="..\..\neon\core\engine\camera_base.cpp" />
     <ClCompile Include="..\..\neon\core\engine\common.cpp" />
     <ClCompile Include="..\..\neon\core\engine\engine.cpp" />
     <ClCompile Include="..\..\neon\core\engine\main.cpp" />

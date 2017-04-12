@@ -3,11 +3,13 @@
 
 class TestTextureTriangle : public Application
 {
+	int testId = 0;
 public:
 	bool Init();
 	bool Update();
 	bool Render();
 	void Test1TextureTriangle();
+	void Test2RotatingTextureCube();
 
 	void HandleKeyInput(int key, int action) override;
 	virtual void HandleMouseButtonInputs(int button, int action) override;

@@ -46,6 +46,12 @@ void NeonInterface::ExitApplication()
 	Engine::get()->ExitApplication();
 }
 
+double NeonInterface::GetDeltaTime()
+{
+	ASSERT("GetDeltaTime Not implemented");
+	return 0.0;
+}
+
 NeonInterface *NeonInterface::instance = nullptr;
 NeonInterface *NeonInterface::get()
 {

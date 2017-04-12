@@ -6,5 +6,6 @@
 
 Application* Application::RegisterApplication()
 {
+	//return new TestSimpleTriangle();
 	return new TestTextureTriangle();
 }

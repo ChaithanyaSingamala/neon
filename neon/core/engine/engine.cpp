@@ -65,19 +65,25 @@ void Engine::HandleKeyInputs(int key, int action)
 void Engine::HandleMouseScrollInputs(double xoffset, double yoffset)
 {
 	if (application)
-		application->HandleKeyInput(xoffset, yoffset);
+		application->HandleMouseScrollInputs(xoffset, yoffset);
 }
 
 void Engine::HandleMouseCursorInputs(double xpos, double ypos)
 {
 	if (application)
-		application->HandleKeyInput(xpos, ypos);
+		application->HandleMouseCursorInputs(xpos, ypos);
 }
 
 void Engine::HandleMouseButtonInputs(int button, int action)
 {
 	if (application)
 		application->HandleMouseButtonInputs(button, action);
+}
+
+double Engine::GetDeltaTime()
+{
+	neonInterface->GetDeltaTime();
+	return 0.0;
 }
 
 Engine *Engine::get()

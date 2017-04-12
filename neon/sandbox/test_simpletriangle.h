@@ -3,6 +3,8 @@
 
 class TestSimpleTriangle : public Application
 {
+	int testId = 0;
+
 	void Test1SingleTriangleDrawArrayNoShader();
 	void Test2SingleTriangleDrawArray();
 	void Test3TwoTriangleDrawArray();
@@ -15,4 +17,7 @@ public:
 	bool Init();
 	bool Update();
 	bool Render();
+
+	void HandleKeyInput(int key, int action) override;
+
 };

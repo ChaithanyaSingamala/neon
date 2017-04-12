@@ -18,6 +18,7 @@ public:
 	virtual unsigned short Height(unsigned short _height = 0) = 0;
 
 	virtual void ExitApplication();
+	virtual double GetDeltaTime();
 
 	static NeonInterface *get();
 	static void destroy();

@@ -10,6 +10,10 @@ class GLFWInterface: public NeonInterface
 	std::string title = "Neon Engine";
 
 	GLFWwindow* window = nullptr;
+	double deltaTime = 0.0;
+	virtual void CalculateUpdateDeltaTime();
+	virtual double GetDeltaTime() override;
+
 public:
 	GLFWInterface();
 	virtual ~GLFWInterface();

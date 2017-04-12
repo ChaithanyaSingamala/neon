@@ -58,6 +58,12 @@
     <ClInclude Include="..\..\neon\core\renderer\texture.h">
       <Filter>renderer</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\neon\core\engine\camera_base.h">
+      <Filter>engine</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\neon\core\engine\camera.h">
+      <Filter>engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\neon\core\interface\neon_interface.cpp">
@@ -105,6 +111,10 @@
     <ClCompile Include="..\..\neon\core\renderer\texture.cpp">
       <Filter>renderer</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\neon\core\engine\camera.cpp">
+      <Filter>engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\neon\core\engine\camera_base.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="interface">

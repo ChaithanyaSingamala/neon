@@ -35,5 +35,7 @@ public:
 	void HandleMouseScrollInputs(double xoffset, double yoffset);
 	void HandleMouseCursorInputs(double xpos, double ypos);
 	void HandleMouseButtonInputs(int button, int action);
+
+	double GetDeltaTime();
 };
 
