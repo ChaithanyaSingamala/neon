@@ -5,8 +5,29 @@
 #include "renderer\shader.h"
 #include "renderer\texture.h"
 
+#include "assimp/Importer.hpp"
+#include "assimp/scene.h"
+#include "assimp/postprocess.h""
+
+void loadModel(std::string path)
+{
+	Assimp::Importer import;
+	const aiScene* scene = import.ReadFile(path, aiProcess_Triangulate | aiProcess_FlipUVs);
+
+	if (!scene || scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode)
+	{
+		std::cout << "ERROR::ASSIMP::" << import.GetErrorString() << std::endl;
+		return;
+	}
+	int sss = 0;
+	//this->directory = path.substr(0, path.find_last_of('/'));
+
+	//this->processNode(scene->mRootNode, scene);
+}
+
 bool TestTextureTriangle::Init()
 {
+	loadModel("resources/models/box.obj");
 	return true;
 }
 
