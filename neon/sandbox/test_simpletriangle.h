@@ -17,6 +17,7 @@ public:
 	bool Init();
 	bool Update();
 	bool Render();
+	bool DeInit() {}
 
 	void HandleKeyInput(int key, int action) override;
 

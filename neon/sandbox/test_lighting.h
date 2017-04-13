@@ -1,10 +1,25 @@
 #include <iostream>
 #include "engine\application.h"
+#include "glm\glm.hpp"
 
 class Camera;
+class Model;
+class Shader;
+class Texture;
 
-class TestApplication : public Application
+class TestLighting : public Application
 {
+
+	Camera *camera = nullptr;
+	Model* testModel = nullptr;
+	Model* testPlaneModel = nullptr;
+	Model* testModelLightSource = nullptr;
+	Shader *shader = nullptr;
+	Shader *shaderForLightSource = nullptr;
+	Texture *texture1 = nullptr;
+
+	glm::vec3 lightPos = glm::vec3(1.2f, 1.0f, 2.0f);
+
 public:
 	virtual bool Init();
 	virtual bool Update();
@@ -16,5 +31,4 @@ public:
 	virtual void HandleMouseScrollInputs(double xoffset, double yoffset) override;
 	virtual void HandleMouseCursorInputs(double xpos, double ypos) override;
 
-	Camera *camera;
 };

@@ -9,6 +9,7 @@ public:
 	virtual bool Init() = 0;
 	virtual bool Update() = 0;
 	virtual bool Render() = 0;
+	virtual bool DeInit() = 0;
 
 	//inputs
 	virtual void HandleKeyInput(int key, int action) {}

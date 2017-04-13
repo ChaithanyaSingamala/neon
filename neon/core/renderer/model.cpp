@@ -1,5 +1,5 @@
 #include "model.h"
-
+#include "glm\gtc\matrix_transform.hpp"
 
 void Model::CreateVAO()
 {
@@ -89,6 +89,43 @@ Model::~Model()
 {
 	glDeleteVertexArrays(1, &voaId);
 	glDeleteBuffers((GLsizei)vbos.size(), vbos.data());
+}
+
+void Model::SetTransformation(glm::vec3 _pos, glm::vec3 _rot, glm::vec3 _scale)
+{
+	transform = glm::mat4(1);
+
+	transform = glm::translate(transform, _pos);
+	transform = glm::rotate(transform, _rot.x, glm::vec3(1.0, 0.0, 0.0));
+	transform = glm::rotate(transform, _rot.y, glm::vec3(0.0, 1.0, 0.0));
+	transform = glm::rotate(transform, _rot.z, glm::vec3(0.0, 0.0, 1.0));
+	transform = glm::scale(transform, glm::vec3(_scale));
+
+}
+
+void Model::Translate(glm::vec3 _pos)
+{
+	transform = glm::translate(transform, _pos);
+}
+
+void Model::Rotate(glm::vec3 _axis, glm::float32 angle)
+{
+	transform = glm::rotate(transform, angle, _axis);
+}
+
+void Model::Scale(glm::vec3 _scale)
+{
+	transform = glm::scale(transform, glm::vec3(_scale));
+}
+
+glm::mat4 Model::GetTransfrom()
+{
+	return transform;
+}
+
+void Model::ResetTransfrom()
+{
+	transform = glm::mat4(1);
 }
 
 void Model::Render()

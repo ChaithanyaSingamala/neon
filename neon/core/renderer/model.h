@@ -1,6 +1,7 @@
 #pragma once
 #include "opengl_header.h"
 #include <vector>
+#include "glm\glm.hpp"
 
 struct VertexAttributeInfo
 {
@@ -42,11 +43,21 @@ class Model
 	void BindVAO();
 	void UnbindVAO();
 
+	glm::mat4 transform = glm::mat4(1);
+
 public:
 	Model(std::vector<GLfloat> _vertexData);
 	Model(std::vector<GLfloat> _vertexData, std::vector<GLushort> _indices);
 	Model(std::vector<GLfloat> _vertexData, std::vector<GLushort> _indices, ModelDataLayout _layout);
 	virtual ~Model();
+
+	void SetTransformation(glm::vec3 _pos, glm::vec3 _rot, glm::vec3 _scale);
+	void Translate(glm::vec3 _pos);
+	void Rotate(glm::vec3 _axis, glm::float32 angle);
+	void Scale(glm::vec3 _scale);
+
+	glm::mat4 GetTransfrom();
+	void ResetTransfrom();
 
 	void Render();
 };	

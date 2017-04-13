@@ -3,12 +3,29 @@
   <ItemGroup>
     <ClCompile Include="..\..\neon\sandbox\test_application.cpp" />
     <ClCompile Include="..\..\neon\sandbox\application.cpp" />
-    <ClCompile Include="..\..\neon\sandbox\test_texturetriangle.cpp" />
-    <ClCompile Include="..\..\neon\sandbox\test_simpletriangle.cpp" />
+    <ClCompile Include="..\..\neon\sandbox\test_simpletriangle.cpp">
+      <Filter>old_test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\neon\sandbox\test_texturetriangle.cpp">
+      <Filter>old_test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\neon\sandbox\test_lighting.cpp" />
+    <ClCompile Include="..\..\neon\sandbox\test_objects.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\neon\sandbox\test_application.h" />
-    <ClInclude Include="..\..\neon\sandbox\test_texturetriangle.h" />
-    <ClInclude Include="..\..\neon\sandbox\test_simpletriangle.h" />
+    <ClInclude Include="..\..\neon\sandbox\test_simpletriangle.h">
+      <Filter>old_test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\neon\sandbox\test_texturetriangle.h">
+      <Filter>old_test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\neon\sandbox\test_lighting.h" />
+    <ClInclude Include="..\..\neon\sandbox\test_objects.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="old_test">
+      <UniqueIdentifier>{59cd4bc3-55d0-4d3b-a634-3c1239c28fbe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
 </Project>

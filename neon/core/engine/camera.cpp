@@ -91,7 +91,7 @@ glm::mat4 Camera::GetPerspectiveMatrix()
 
 Camera::Camera(glm::vec3 position, glm::vec3 up, GLfloat yaw, GLfloat pitch)
 {
-	this->Position = position;
+	this->Position = position; 
 	this->WorldUp = up;
 	this->Yaw = yaw;
 	this->Pitch = pitch;

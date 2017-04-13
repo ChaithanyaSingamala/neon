@@ -37,7 +37,8 @@ void Engine::Loop()
 		neonInterface->Update();
 	}
 	Renderer::destroy();
-	delete engine->application;
+	application->DeInit();
+	delete application;
 	engine->application = nullptr;
 	NeonInterface::destroy();
 
