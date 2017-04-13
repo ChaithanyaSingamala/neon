@@ -82,8 +82,7 @@ void Engine::HandleMouseButtonInputs(int button, int action)
 
 double Engine::GetDeltaTime()
 {
-	neonInterface->GetDeltaTime();
-	return 0.0;
+	return neonInterface->GetDeltaTime();
 }
 
 Engine *Engine::get()

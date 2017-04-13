@@ -111,7 +111,7 @@ void TestTextureTriangle::Test1TextureTriangle()
 	model->Render();
 }
 Shader *shader = nullptr;
-glm::vec3 position(0.0f, 0.0f, 0.0f);
+glm::vec3 position(0.0f, 0.0f, -3.0f);
 glm::vec3 rotation(0.0f, 0.0f, 0.0f);
 glm::float32 scale = 0.6;
 
@@ -233,12 +233,12 @@ void TestTextureTriangle::HandleKeyInput(int key, int action)
 			break;
 		case 263: testId--; // left arrow key
 			break;
-		case 87://w
-			position.z += 0.1f;
-			break;
-		case 83://s
-			position.z -= 0.1f;
-			break;
+		//case 87://w
+		//	position.z += 0.1f;
+		//	break;
+		//case 83://s
+		//	position.z -= 0.1f;
+		//	break;
 
 		}
 	}

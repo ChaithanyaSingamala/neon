@@ -109,6 +109,7 @@ bool GLFWInterface::Update()
 	glfwSwapBuffers(window);
 	glfwPollEvents();
 
+	CalculateUpdateDeltaTime();
 #if ENABLE_FPS_PRINT
 	static double lastTime = glfwGetTime();
 	static int nbFrames = 0;

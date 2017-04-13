@@ -4,7 +4,7 @@
 
 void Camera::HandleKeyInput(int key, int action)
 {
-	if (action > 0)
+	if (action == 2)
 	{
 		switch (key)
 		{
@@ -20,7 +20,31 @@ void Camera::HandleKeyInput(int key, int action)
 		case 68://d
 			ProcessKeyboard(RIGHT, (GLfloat)Engine::get()->GetDeltaTime());
 			break;
+		case 341:	//left ctl
+		case 345:	//right ctl
+			mouseLock = false;
+			break;
 
+		}
+	}
+	else if (action == 0)
+	{
+		switch (key)
+		{
+		case 341:	//left ctl
+		case 345:	//right ctl
+			mouseLock = true;
+			break;
+		}
+	}
+	else if (action == 1)
+	{
+		switch (key)
+		{
+		case 341:	//left ctl
+		case 345:	//right ctl
+			mouseLock = false;
+			break;
 		}
 	}
 	//std::cout << "key " << key << " " << action << " " << std::endl;
@@ -33,7 +57,8 @@ void Camera::HandleMouseButtonInputs(int button, int action)
 
 void Camera::HandleMouseScrollInputs(double xoffset, double yoffset)
 {
-	ProcessMouseScroll((GLfloat)yoffset);
+	if(!mouseLock)
+		ProcessMouseScroll((GLfloat)yoffset);
 	//std::cout << "mouse scroll " << xoffset << " " << yoffset << " " << std::endl;
 }
 
@@ -52,14 +77,16 @@ void Camera::HandleMouseCursorInputs(double xpos, double ypos)
 	lastX = (GLfloat)xpos;
 	lastY = (GLfloat)ypos;
 
-	ProcessMouseMovement((GLfloat)xoffset, (GLfloat)yoffset);
-
+	if (!mouseLock)
+	{
+		ProcessMouseMovement((GLfloat)xoffset, (GLfloat)yoffset);
+	}
 	//std::cout << "mouse cursor " << xpos << " " << ypos << " " << std::endl;
 }
 
 glm::mat4 Camera::GetPerspectiveMatrix()
 {
-	return glm::perspective(Zoom, NeonInterface::get()->Width() / (float)NeonInterface::get()->Height(), 0.1f, 1000.0f);
+	return glm::perspective(glm::radians(Zoom), NeonInterface::get()->Width() / (float)NeonInterface::get()->Height(), 0.1f, 1000.0f);
 }
 
 Camera::Camera(glm::vec3 position, glm::vec3 up, GLfloat yaw, GLfloat pitch)
