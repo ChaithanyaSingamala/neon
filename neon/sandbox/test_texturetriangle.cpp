@@ -113,7 +113,7 @@ void TestTextureTriangle::Test1TextureTriangle()
 Shader *shader = nullptr;
 glm::vec3 position(0.0f, 0.0f, -3.0f);
 glm::vec3 rotation(0.0f, 0.0f, 0.0f);
-glm::float32 scale = 0.6;
+glm::float32 scale = 0.6f;
 
 void UpdateModel1Transform(glm::vec3 position, glm::vec3 rotation, glm::float32 scale)
 {

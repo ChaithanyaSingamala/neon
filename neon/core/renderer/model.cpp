@@ -55,7 +55,7 @@ void Model::UnbindVAO()
 
 Model::Model(std::vector<GLfloat> _vertexData)
 {
-	vertexCount = _vertexData.size();
+	vertexCount = (GLuint)_vertexData.size();
 	CreateVAO();
 	ModelDataLayout layout;
 	layout.position = { GL_TRUE, 0, 0, 0, 3};
@@ -65,7 +65,7 @@ Model::Model(std::vector<GLfloat> _vertexData)
 
 Model::Model(std::vector<GLfloat> _vertexData, std::vector<GLushort> _indices)
 {
-	vertexCount = _indices.size();
+	vertexCount = (GLuint)_indices.size();
 	CreateVAO();
 	ModelDataLayout layout;
 	layout.position = {GL_TRUE, 0, 0, 0, 3};
@@ -77,7 +77,7 @@ Model::Model(std::vector<GLfloat> _vertexData, std::vector<GLushort> _indices)
 
 Model::Model(std::vector<GLfloat> _vertexData, std::vector<GLushort> _indices, ModelDataLayout _layout)
 {
-	vertexCount = _indices.size();
+	vertexCount = (GLuint)_indices.size();
 	CreateVAO();
 	CreateVBO(_vertexData, _layout);
 	CreateIBO(_indices);
@@ -88,7 +88,7 @@ Model::Model(std::vector<GLfloat> _vertexData, std::vector<GLushort> _indices, M
 Model::~Model()
 {
 	glDeleteVertexArrays(1, &voaId);
-	glDeleteBuffers(vbos.size(), vbos.data());
+	glDeleteBuffers((GLsizei)vbos.size(), vbos.data());
 }
 
 void Model::Render()

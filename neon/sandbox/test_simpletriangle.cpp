@@ -297,11 +297,11 @@ void TestSimpleTriangle::Test4ChangeVertexDepth()
 	glClearColor(0.3f, 0.1f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glViewport(0, 0, NeonInterface::get()->Width() / 2.0, NeonInterface::get()->Height());
+	glViewport(0, 0, (GLsizei)(NeonInterface::get()->Width() / 2.0), (GLsizei)(NeonInterface::get()->Height()));
 	glEnable(GL_DEPTH_TEST);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
 
-	glViewport(NeonInterface::get()->Width() / 2.0, 0, NeonInterface::get()->Width() / 2.0, NeonInterface::get()->Height());
+	glViewport((GLsizei)(NeonInterface::get()->Width() / 2.0), 0, (GLsizei)(NeonInterface::get()->Width() / 2.0), (GLsizei)(NeonInterface::get()->Height()));
 	glDisable(GL_DEPTH_TEST);
 	glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_SHORT, 0);
 

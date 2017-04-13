@@ -5,3 +5,11 @@
 /build-vs2015/temp/
 /binaries/lib-vc2015/win32/Debug/sandbox-testing.ilk
 /binaries/lib-vc2015/win32/Debug/sandbox-testing.pdb
+/binaries/lib-vc2015/win32/Release/sandbox-testing.iobj
+/binaries/lib-vc2015/win32/Release/sandbox-testing.ipdb
+/binaries/lib-vc2015/win32/Release/sandbox-testing.pdb
+/binaries/lib-vc2015/x64/Debug/sandbox-testing.ilk
+/binaries/lib-vc2015/x64/Debug/sandbox-testing.pdb
+/binaries/lib-vc2015/x64/Release/sandbox-testing.iobj
+/binaries/lib-vc2015/x64/Release/sandbox-testing.ipdb
+/binaries/lib-vc2015/x64/Release/sandbox-testing.pdb
