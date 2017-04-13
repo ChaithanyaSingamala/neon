@@ -1721,7 +1721,7 @@ unsigned int SOIL_direct_load_DDS_from_memory(
 	/*	do this for each face of the cubemap!	*/
 	for( cf_target = ogl_target_start; cf_target <= ogl_target_end; ++cf_target )
 	{
-		if( buffer_index + DDS_full_size <= buffer_length )
+		if( (int)(buffer_index + DDS_full_size) <= buffer_length )
 		{
 			unsigned int byte_offset = DDS_main_size;
 			memcpy( (void*)DDS_data, (const void*)(&buffer[buffer_index]), DDS_full_size );
@@ -1731,7 +1731,7 @@ unsigned int SOIL_direct_load_DDS_from_memory(
 			{
 				/*	and remember, DXT uncompressed uses BGR(A),
 					so swap to RGB(A) for ALL MIPmap levels	*/
-				for( i = 0; i < DDS_full_size; i += block_size )
+				for( i = 0; i < (int)DDS_full_size; i += block_size )
 				{
 					unsigned char temp = DDS_data[i];
 					DDS_data[i] = DDS_data[i+2];
@@ -1869,7 +1869,7 @@ unsigned int SOIL_direct_load_DDS(
 	}
 	/*	now try to do the loading	*/
 	tex_ID = SOIL_direct_load_DDS_from_memory(
-		(const unsigned char *const)buffer, buffer_length,
+		(const unsigned char *const)buffer, (int)buffer_length,
 		reuse_texture_ID, flags, loading_as_cubemap );
 	SOIL_free_image_data( buffer );
 	return tex_ID;
@@ -1952,6 +1952,9 @@ int query_cubemap_capability( void )
 	/*	let the user know if we can do cubemaps or not	*/
 	return has_cubemap_capability;
 }
+
+typedef void* (APIENTRYP PFNWGLGETPROCADDRESSPROC_PRIVATE)(const char*);
+PFNWGLGETPROCADDRESSPROC_PRIVATE gladGetProcAddressPtr;
 
 int query_DXT_capability( void )
 {

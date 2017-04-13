@@ -18,8 +18,8 @@ class Texture
 public:
 	Texture(std::string _filename);
 	virtual ~Texture();
-	void Bind(GLuint _textureUnit = UINT_MAX);
-	void UnBind(GLuint _textureUnit = UINT_MAX);
+	void Bind(GLint _textureUnit = UINT_MAX);
+	void UnBind(GLint _textureUnit = UINT_MAX);
 
 	static void StaticInit();
 };

@@ -30,14 +30,14 @@ Texture::~Texture()
 
 }
 
-void Texture::Bind(GLuint _textureUnit)
+void Texture::Bind(GLint _textureUnit)
 {
 	if (_textureUnit < staticValues.maxCombinedTextureUnits)
 		glActiveTexture(GL_TEXTURE0 + _textureUnit);
 	glBindTexture(GL_TEXTURE_2D, textureId);
 }
 
-void Texture::UnBind(GLuint _textureUnit)
+void Texture::UnBind(GLint _textureUnit)
 {
 	glBindTexture(GL_TEXTURE_2D, 0);
 	if (_textureUnit < staticValues.maxCombinedTextureUnits)
