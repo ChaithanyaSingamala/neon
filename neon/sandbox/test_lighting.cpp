@@ -40,7 +40,7 @@ bool TestLighting::Init()
 			{ "vertexUV", VERT_UV0_LOC },
 			{ "vertexNormal", VERT_NORMAL_LOC },
 		};
-		shader = new Shader("resources/shaders/v140/lighting01.vert", "resources/shaders/v140/lighting01.frag", infos);
+		shader = new Shader("resources/shaders/v140/phong.vert", "resources/shaders/v140/phong.frag", infos);
 		shader->Set();
 		glUniform3fv(shader->GetUniformLocation("lightColor"), 1, glm::value_ptr(glm::vec3(1.0)));
 		glUniform3fv(shader->GetUniformLocation("objectColor"), 1, glm::value_ptr(glm::vec3(1.0f, 0.5f, 0.31f)));

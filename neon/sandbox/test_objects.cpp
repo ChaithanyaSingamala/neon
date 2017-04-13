@@ -3,9 +3,9 @@
 #include "engine\camera.h"
 #include "renderer\model.h"
 
-Model * CreateModelCube()
+Mesh * CreateModelCube()
 {
-	Model *model = 0;
+	Mesh *model = 0;
 
 	std::vector<GLfloat> vertexArray =
 	{
@@ -58,18 +58,18 @@ Model * CreateModelCube()
 		indices.push_back(36 - i - 1);
 	}
 
-	ModelDataLayout layout;
+	MeshDataLayout layout;
 	layout.position = { GL_TRUE, VERT_POS_LOC, 0, 8, 3 };
 	layout.normal = { GL_TRUE, VERT_NORMAL_LOC, 3, 8, 3 };
 	layout.uv = { GL_TRUE, VERT_UV0_LOC, 6, 8, 2 };
-	model = new Model(vertexArray, indices, layout);
+	model = new Mesh(vertexArray, indices, layout);
 
 	return model;
 }
 
-Model * CreateModelPlaneXZ(float _size, float _yOffset)
+Mesh * CreateModelPlaneXZ(float _size, float _yOffset)
 {
-	Model *model = 0;
+	Mesh *model = 0;
 
 	std::vector<GLfloat> vertexArray =
 	{
@@ -87,11 +87,11 @@ Model * CreateModelPlaneXZ(float _size, float _yOffset)
 		indices.push_back(6 - i - 1);
 	}
 
-	ModelDataLayout layout;
+	MeshDataLayout layout;
 	layout.position = { GL_TRUE, VERT_POS_LOC, 0, 8, 3 };
 	layout.normal = { GL_TRUE, VERT_NORMAL_LOC, 3, 8, 3 };
 	layout.uv = { GL_TRUE, VERT_UV0_LOC, 6, 8, 2 };
-	model = new Model(vertexArray, indices, layout);
+	model = new Mesh(vertexArray, indices, layout);
 
 	return model;
 }

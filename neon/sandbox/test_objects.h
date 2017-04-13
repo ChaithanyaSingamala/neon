@@ -1,10 +1,10 @@
 #include <iostream>
 
-class Model;
+class Mesh;
 
-Model *CreateModelCube();
+Mesh *CreateModelCube();
 
-Model *CreateModelPlaneXZ(float _size = 2.0f, float _yOffset = -1.0f);
+Mesh *CreateModelPlaneXZ(float _size = 2.0f, float _yOffset = -1.0f);
 
 
 

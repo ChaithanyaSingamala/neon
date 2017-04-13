@@ -68,7 +68,7 @@ bool TestTextureTriangle::Render()
 void TestTextureTriangle::Test1TextureTriangle()
 {
 	static bool init = false;
-	static Model *model = 0;
+	static Mesh *model = 0;
 	if (!init)
 	{
 
@@ -96,11 +96,11 @@ void TestTextureTriangle::Test1TextureTriangle()
 			-0.5f, -0.5f, +0.0f,		1.0f, 1.0f, 1.0f,		0.0f, 1.0f  // Bottom-left
 		};
 		std::vector<GLushort> indices = { 0, 1, 2,  2, 3, 0 };
-		ModelDataLayout layout;
+		MeshDataLayout layout;
 		layout.position =	{ GL_TRUE, VERT_POS_LOC, 0, 8, 3 };
 		layout.color =		{ GL_TRUE, VERT_COLOR_LOC, 3, 8, 3 };
 		layout.uv =			{ GL_TRUE, VERT_UV0_LOC, 6, 8, 2 };
-		model = new Model(vertexArray, indices, layout);
+		model = new Mesh(vertexArray, indices, layout);
 
 		init = true;
 	}
@@ -131,7 +131,7 @@ void UpdateModel1Transform(glm::vec3 position, glm::vec3 rotation, glm::float32 
 void TestTextureTriangle::Test2RotatingTextureCube()
 {
 	static bool init = false;
-	static Model *model = 0;
+	static Mesh *model = 0;
 	
 	if (!init)
 	{
@@ -194,10 +194,10 @@ void TestTextureTriangle::Test2RotatingTextureCube()
 
 		};
 
-		ModelDataLayout layout;
+		MeshDataLayout layout;
 		layout.position = { GL_TRUE, VERT_POS_LOC, 0, 5, 3 };
 		layout.uv = { GL_TRUE, VERT_UV0_LOC, 3, 5, 2 };
-		model = new Model(vertexArray, indices, layout);
+		model = new Mesh(vertexArray, indices, layout);
 
 		glEnable(GL_DEPTH_TEST);
 

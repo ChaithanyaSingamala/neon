@@ -3,6 +3,10 @@
 #include <vector>
 #include "glm\glm.hpp"
 
+#include "assimp/Importer.hpp"
+#include "assimp/scene.h"
+#include "assimp/postprocess.h"
+
 struct VertexAttributeInfo
 {
 	GLboolean isSet = GL_FALSE;
@@ -19,7 +23,7 @@ struct VertexAttributeInfo
 		size(_size)
 	{};
 };
-class ModelDataLayout
+class MeshDataLayout
 {
 public:
 	VertexAttributeInfo position;
@@ -28,7 +32,24 @@ public:
 	VertexAttributeInfo normal;
 };
 
+class Mesh;
+
 class Model
+{
+	std::vector<Mesh*> meshes;
+	std::string directory;
+
+public:
+	Model(std::string _fileName);
+	void ProcessNode(aiNode * node, const aiScene * scene);
+	Mesh* ProcessMesh(aiMesh * mesh, const aiScene * scene);
+	virtual ~Model();
+
+
+
+};
+
+class Mesh
 {
 	GLuint voaId = 0;
 	GLuint vertexCount = 0;
@@ -37,7 +58,7 @@ class Model
 	bool usingIndexBuffer = false;
 
 	void CreateVAO();
-	void CreateVBO(std::vector<GLfloat> _data, ModelDataLayout _layout);
+	void CreateVBO(std::vector<GLfloat> _data, MeshDataLayout _layout);
 	void CreateIBO(std::vector<GLushort> _data);
 	void SetVertexAttribute(VertexAttributeInfo _info);
 	void BindVAO();
@@ -46,10 +67,10 @@ class Model
 	glm::mat4 transform = glm::mat4(1);
 
 public:
-	Model(std::vector<GLfloat> _vertexData);
-	Model(std::vector<GLfloat> _vertexData, std::vector<GLushort> _indices);
-	Model(std::vector<GLfloat> _vertexData, std::vector<GLushort> _indices, ModelDataLayout _layout);
-	virtual ~Model();
+	Mesh(std::vector<GLfloat> _vertexData);
+	Mesh(std::vector<GLfloat> _vertexData, std::vector<GLushort> _indices);
+	Mesh(std::vector<GLfloat> _vertexData, std::vector<GLushort> _indices, MeshDataLayout _layout);
+	virtual ~Mesh();
 
 	void SetTransformation(glm::vec3 _pos, glm::vec3 _rot, glm::vec3 _scale);
 	void Translate(glm::vec3 _pos);

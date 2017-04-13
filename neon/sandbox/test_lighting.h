@@ -3,7 +3,7 @@
 #include "glm\glm.hpp"
 
 class Camera;
-class Model;
+class Mesh;
 class Shader;
 class Texture;
 
@@ -11,9 +11,9 @@ class TestLighting : public Application
 {
 
 	Camera *camera = nullptr;
-	Model* testModel = nullptr;
-	Model* testPlaneModel = nullptr;
-	Model* testModelLightSource = nullptr;
+	Mesh* testModel = nullptr;
+	Mesh* testPlaneModel = nullptr;
+	Mesh* testModelLightSource = nullptr;
 	Shader *shader = nullptr;
 	Shader *shaderForLightSource = nullptr;
 	Texture *texture1 = nullptr;
