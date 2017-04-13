@@ -6,12 +6,14 @@ class Camera;
 class Mesh;
 class Shader;
 class Texture;
+class Model;
 
 class TestLighting : public Application
 {
 
 	Camera *camera = nullptr;
-	Mesh* testModel = nullptr;
+	Mesh* testMesh = nullptr;
+	Model* testModel = nullptr;
 	Mesh* testPlaneModel = nullptr;
 	Mesh* testModelLightSource = nullptr;
 	Shader *shader = nullptr;

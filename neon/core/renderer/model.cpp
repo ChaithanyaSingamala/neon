@@ -185,9 +185,18 @@ Mesh *Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 		vertices[1 + i * 8] = mesh->mVertices[i].y;
 		vertices[2 + i * 8] = mesh->mVertices[i].z;
 		// Normals
-		vertices[3 + i * 8] = mesh->mNormals[i].x;
-		vertices[4 + i * 8] = mesh->mNormals[i].y;
-		vertices[5 + i * 8] = mesh->mNormals[i].z;
+		if (mesh->mNormals)
+		{
+			vertices[3 + i * 8] = mesh->mNormals[i].x;
+			vertices[4 + i * 8] = mesh->mNormals[i].y;
+			vertices[5 + i * 8] = mesh->mNormals[i].z;
+		}
+		else
+		{
+			vertices[3 + i * 8] = 0.0f;
+			vertices[4 + i * 8] = 0.0f;
+			vertices[5 + i * 8] = 0.0f;
+		}
 
 		if (mesh->mTextureCoords[0]) // Does the mesh contain texture coordinates?
 		{
@@ -235,7 +244,58 @@ Mesh *Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 	return new Mesh(vertices, indices, layout);
 }
 
+void Model::SetTransformation(glm::vec3 _pos, glm::vec3 _rot, glm::vec3 _scale)
+{
+	transform = glm::mat4(1);
+
+	transform = glm::translate(transform, _pos);
+	transform = glm::rotate(transform, _rot.x, glm::vec3(1.0, 0.0, 0.0));
+	transform = glm::rotate(transform, _rot.y, glm::vec3(0.0, 1.0, 0.0));
+	transform = glm::rotate(transform, _rot.z, glm::vec3(0.0, 0.0, 1.0));
+	transform = glm::scale(transform, glm::vec3(_scale));
+
+}
+
+void Model::Translate(glm::vec3 _pos)
+{
+	transform = glm::translate(transform, _pos);
+}
+
+void Model::Rotate(glm::vec3 _axis, glm::float32 angle)
+{
+	transform = glm::rotate(transform, angle, _axis);
+}
+
+void Model::Scale(glm::vec3 _scale)
+{
+	transform = glm::scale(transform, glm::vec3(_scale));
+}
+
+glm::mat4 Model::GetTransfrom()
+{
+	return transform;
+}
+
+void Model::ResetTransfrom()
+{
+	transform = glm::mat4(1);
+}
+
+void Model::Render()
+{
+	for (auto mesh : meshes)
+		mesh->Render();
+}
+
+
 
 Model::~Model()
 {
+}
+
+Mesh * Model::GetMesh(int index)
+{
+	if (index < meshes.size())
+		return meshes[index];
+	return nullptr;
 }

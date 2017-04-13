@@ -39,14 +39,25 @@ class Model
 	std::vector<Mesh*> meshes;
 	std::string directory;
 
+	glm::mat4 transform = glm::mat4(1);
+
 public:
 	Model(std::string _fileName);
 	void ProcessNode(aiNode * node, const aiScene * scene);
 	Mesh* ProcessMesh(aiMesh * mesh, const aiScene * scene);
 	virtual ~Model();
 
+	Mesh* GetMesh(int index);
 
+	void SetTransformation(glm::vec3 _pos, glm::vec3 _rot, glm::vec3 _scale);
+	void Translate(glm::vec3 _pos);
+	void Rotate(glm::vec3 _axis, glm::float32 angle);
+	void Scale(glm::vec3 _scale);
 
+	glm::mat4 GetTransfrom();
+	void ResetTransfrom();
+
+	void Render();
 };
 
 class Mesh

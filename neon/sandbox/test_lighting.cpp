@@ -18,9 +18,30 @@ bool TestLighting::Init()
 	//load texture
 	texture1 = new Texture("resources/textures/texture_4.png");
 	//load models
-	testModel = CreateModelCube();
-	testPlaneModel = CreateModelPlaneXZ(5.0f);
+
+	int test = 0;
+	if (test == 0)
+	{
+		testMesh = CreateModelCube();
+
+	}
+	else if(test == 1)
+	{
+		Model *m = new Model("resources/models/duck.dae");
+		testMesh = m->GetMesh(0);
+		testMesh->Scale(glm::vec3(0.01));
+		testMesh->Translate(glm::vec3(0.0, -90.0f, 0.0f));
+	}
 	
+	if (true)
+	{
+		testModel = new Model("resources/models/nanosuit.obj");
+		testModel->Scale(glm::vec3(0.1));
+		testModel->Translate(glm::vec3(0.0, -10.0f, 0.0f));
+	}
+
+	testPlaneModel = CreateModelPlaneXZ(1.0f);
+	   
 	//light source
 	lightPos = glm::vec3(1.5f, 0.0f, 0.0f);
 	testModelLightSource = CreateModelCube();
@@ -75,7 +96,7 @@ bool TestLighting::Render()
 	glm::vec3 newLightPos = glm::vec3(0);
 	{
 		static float rot = 0.0;
-		rot += 0.0002f;
+		rot += 0.002f;
 		shaderForLightSource->Set();
 		glUniformMatrix4fv(shaderForLightSource->GetUniformLocation("proj"), 1, GL_FALSE, glm::value_ptr(camera->GetPerspectiveMatrix()));
 		glUniformMatrix4fv(shaderForLightSource->GetUniformLocation("view"), 1, GL_FALSE, glm::value_ptr(camera->GetViewMatrix()));
@@ -104,17 +125,23 @@ bool TestLighting::Render()
 		glUniform3fv(shader->GetUniformLocation("lightPos"), 1, glm::value_ptr(newLightPos));
 	
 		{
-			glUniformMatrix4fv(shader->GetUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(testModel->GetTransfrom()));
-			CalculateNormalMatrix(testModel->GetTransfrom(), shader);
+			glUniformMatrix4fv(shader->GetUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(testPlaneModel->GetTransfrom()));
+			CalculateNormalMatrix(testPlaneModel->GetTransfrom(), shader);
 			testPlaneModel->Render();
 		}
 
 		{
+			glUniformMatrix4fv(shader->GetUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(testMesh->GetTransfrom()));
+			CalculateNormalMatrix(testMesh->GetTransfrom(), shader);
+			//testMesh->Render();
+		}
+
+		{
+
 			glUniformMatrix4fv(shader->GetUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(testModel->GetTransfrom()));
 			CalculateNormalMatrix(testModel->GetTransfrom(), shader);
 			testModel->Render();
 		}
-		
 		
 		shader->Reset();
 	}
@@ -123,7 +150,7 @@ bool TestLighting::Render()
 
 bool TestLighting::DeInit()
 {
-	delete testModel;
+	delete testMesh;
 	delete shader;
 	delete texture1;
 
