@@ -114,7 +114,9 @@
     <ClCompile Include="..\..\neon\core\engine\camera.cpp">
       <Filter>engine</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\neon\core\engine\camera_base.cpp" />
+    <ClCompile Include="..\..\neon\core\engine\camera_base.cpp">
+      <Filter>engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="interface">

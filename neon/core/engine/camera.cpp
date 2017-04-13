@@ -2,8 +2,6 @@
 #include "engine.h"
 #include "interface\neon_interface.h"
 
-Camera *Camera::activeCamera = nullptr;
-
 void Camera::HandleKeyInput(int key, int action)
 {
 	if (action > 0)
@@ -62,11 +60,6 @@ void Camera::HandleMouseCursorInputs(double xpos, double ypos)
 glm::mat4 Camera::GetPerspectiveMatrix()
 {
 	return glm::perspective(Zoom, NeonInterface::get()->Width() / (float)NeonInterface::get()->Height(), 0.1f, 1000.0f);
-}
-
-Camera * Camera::get()
-{
-	return activeCamera;
 }
 
 Camera::Camera(glm::vec3 position, glm::vec3 up, GLfloat yaw, GLfloat pitch)

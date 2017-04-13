@@ -1,6 +1,8 @@
 #include <iostream>
 #include "engine\application.h"
 
+class Camera;
+
 class TestTextureTriangle : public Application
 {
 	int testId = 0;
@@ -16,5 +18,5 @@ public:
 	virtual void HandleMouseScrollInputs(double xoffset, double yoffset) override;
 	virtual void HandleMouseCursorInputs(double xpos, double ypos) override;
 
-
+	Camera *camera;
 };

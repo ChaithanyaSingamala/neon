@@ -12,7 +12,8 @@
 
 #include "assimp/Importer.hpp"
 #include "assimp/scene.h"
-#include "assimp/postprocess.h""
+#include "assimp/postprocess.h"
+#include "engine\camera.h"
 
 void loadModel(std::string path)
 {
@@ -33,6 +34,8 @@ void loadModel(std::string path)
 bool TestTextureTriangle::Init()
 {
 	loadModel("resources/models/box.obj");
+
+	camera = new Camera();
 	return true;
 }
 
@@ -132,7 +135,7 @@ void TestTextureTriangle::Test2RotatingTextureCube()
 	
 	if (!init)
 	{
-		glm::mat4 proj = ;
+		glm::mat4 proj = camera->GetPerspectiveMatrix();
 
 		ShaderAttribInfo infos = {
 			{ "vertexPosition", VERT_POS_LOC },
@@ -204,12 +207,19 @@ void TestTextureTriangle::Test2RotatingTextureCube()
 	glClearColor(0.3f, 0.1f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
+
 	rotation.x += 0.0002f;
 	rotation.y += 0.0002f;
 	rotation.z += 0.0002f;
 
 
 	UpdateModel1Transform(position, rotation, scale);
+
+	//continuesly udaing projMatrix also for now, actually only need to update if any changes
+	glUniformMatrix4fv(shader->GetUniformLocation("projMatrix"), 1, GL_FALSE, glm::value_ptr(camera->GetPerspectiveMatrix()));
+
+	glUniformMatrix4fv(shader->GetUniformLocation("viewMatrix"), 1, GL_FALSE, glm::value_ptr(camera->GetViewMatrix()));
+
 	model->Render();
 }
 
@@ -232,20 +242,24 @@ void TestTextureTriangle::HandleKeyInput(int key, int action)
 
 		}
 	}
+	camera->HandleKeyInput(key, action);
 	//std::cout << "key " << key << " " << action << " " << std::endl;
 }
 
 void TestTextureTriangle::HandleMouseButtonInputs(int button, int action)
 {
+	camera->HandleMouseButtonInputs(button, action);
 	//std::cout << "mouse button " << button << " " << action << " " << std::endl;
 }
 
 void TestTextureTriangle::HandleMouseScrollInputs(double xoffset, double yoffset)
 {
+	camera->HandleMouseScrollInputs(xoffset, yoffset);
 	//std::cout << "mouse scroll " << xoffset << " " << yoffset << " " << std::endl;
 }
 
 void TestTextureTriangle::HandleMouseCursorInputs(double xpos, double ypos)
 {
+	camera->HandleMouseCursorInputs(xpos, ypos);
 	//std::cout << "mouse cursor " << xpos << " " << ypos << " " << std::endl;
 }
