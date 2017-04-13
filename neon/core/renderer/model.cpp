@@ -173,7 +173,7 @@ void Model::ProcessNode(aiNode* node, const aiScene* scene)
 
 Mesh *Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 {
-	std::vector<GLuint> indices;
+	std::vector<GLushort> indices;
 	//vector<Texture> textures;
 
 	int totalVertexLength = 8;
@@ -232,8 +232,7 @@ Mesh *Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 	layout.normal = { GL_TRUE, VERT_NORMAL_LOC, 3, 8, 3 };
 	layout.uv = { GL_TRUE, VERT_UV0_LOC, 6, 8, 2 };
 
-	Mesh mesh = new Mesh(vertices, indices, layout);
-	return mesh;
+	return new Mesh(vertices, indices, layout);
 }
 
 

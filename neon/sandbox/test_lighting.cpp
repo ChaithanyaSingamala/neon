@@ -57,6 +57,17 @@ bool TestLighting::Update()
 	return true;
 }
 
+glm::mat3 CalculateNormalMatrix(glm::mat4 _modelMatrix, Shader *_shader)
+{
+	glm::mat3 output = glm::inverse(_modelMatrix);
+	output = glm::transpose(output);
+
+	if(_shader)
+		glUniformMatrix3fv(_shader->GetUniformLocation("normalMatrix"), 1, GL_FALSE, glm::value_ptr(output));
+
+	return output;
+}
+
 bool TestLighting::Render()
 {
 	glClearColor(0.3f, 0.1f, 0.3f, 1.0f);
@@ -94,11 +105,13 @@ bool TestLighting::Render()
 	
 		{
 			glUniformMatrix4fv(shader->GetUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(testModel->GetTransfrom()));
+			CalculateNormalMatrix(testModel->GetTransfrom(), shader);
 			testPlaneModel->Render();
 		}
 
 		{
 			glUniformMatrix4fv(shader->GetUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(testModel->GetTransfrom()));
+			CalculateNormalMatrix(testModel->GetTransfrom(), shader);
 			testModel->Render();
 		}
 		
