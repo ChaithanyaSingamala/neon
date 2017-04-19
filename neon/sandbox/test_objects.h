@@ -1,13 +1,15 @@
 #include <iostream>
 
-class Model;
+class Mesh;
 class Shader;
 
-Model *CreateModelCube(Shader *_shader);
+Mesh *CreateModelCube(Shader *_shader);
 
-Model *CreateModelPlaneXZ(Shader *_shader, float _size = 2.0f, float _yOffset = -1.0f);
+Mesh *CreateModelPlaneXZ(Shader *_shader, float _size = 2.0f, float _yOffset = -1.0f);
 
 char *ShaderCodeLightingVert();
 char *ShaderCodeLightingFrag();
 
+char *ShaderCodeBaseVert();
+char *ShaderCodeBaseFrag();
 

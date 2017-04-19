@@ -36,12 +36,13 @@ Shader::Shader(const GLchar * _shaderCodeVert, const GLchar * _shaderCodeFrag, S
 	glAttachShader(programId, vertShaderId);
 	glAttachShader(programId, fragShaderId);
 
+	glLinkProgram(programId);
+
 	for (auto info : vertexAttributeLocs)
 	{
 		attrribLocations[info.second] = glGetAttribLocation(programId, info.first.c_str());
 	}
 
-	glLinkProgram(programId);
 
 
 #if USING_GLAD

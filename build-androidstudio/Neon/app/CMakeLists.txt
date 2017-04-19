@@ -8,6 +8,7 @@ file(GLOB SOURCES
     "../../../neon/core/engine/common.cpp"
     "../../../neon/core/engine/camera_base.cpp"
     "../../../neon/core/engine/camera.cpp"
+    "../../../neon/core/engine/orbit_camera.cpp"
 
     "../../../neon/core/interface/neon_interface.cpp"
     "../../../neon/core/interface/sdl2_interface.cpp"
@@ -54,11 +55,13 @@ file(GLOB SDL_SOURCES
     "src/main/cpp/SDL2/src/timer/unix/*.c"
     "src/main/cpp/SDL2/src/video/*.c"
     "src/main/cpp/SDL2/src/video/android/*.c"
-    "src/main/cpp/SDL2/src/test/*.c"
     "src/main/cpp/SDL2/src/main/android/SDL_android_main.c"
 
 
 )
+
+ #   "src/main/cpp/SDL2/src/test/*.c"
+
 
 include_directories(../../../neon/core)
 include_directories(../../../neon/external/soil)

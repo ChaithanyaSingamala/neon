@@ -8,13 +8,12 @@ SDL_GLContext sdlGL = 0;
 
 void SDL2Interface::CalculateUpdateDeltaTime()
 {
-	static double lastTime = SDL_GetTicks();
-	double currentTime = SDL_GetTicks();
-	deltaTime = currentTime - lastTime;
+	static Uint32 lastTime = SDL_GetTicks();
+	Uint32 currentTime = SDL_GetTicks();
+	deltaTime = (currentTime - lastTime)/1000.0;
 	lastTime = currentTime;
 
 }
-
 double SDL2Interface::GetDeltaTime()
 {
 	return deltaTime;
@@ -91,11 +90,13 @@ bool SDL2Interface::Init()
 
 	sdlGL = SDL_GL_CreateContext(window);
 
+#ifndef ANDROID_BUILD
 	windowOptStr = GetFromCommandOption("-vsync");
 	if (windowOptStr != "")
 		SDL_GL_SetSwapInterval(1);
 	else
 		SDL_GL_SetSwapInterval(0);
+#endif
 
 	return false;
 }
@@ -120,17 +121,18 @@ bool SDL2Interface::Update()
 
 	CalculateUpdateDeltaTime();
 #if ENABLE_FPS_PRINT
-	static double lastTime = SDL_GetTicks();
+	static Uint32 lastTime = SDL_GetTicks();
 	static int nbFrames = 0;
-	double currentTime = SDL_GetTicks();
+	Uint32 currentTime = SDL_GetTicks();
 	nbFrames++;
-	if (currentTime - lastTime >= 1.0) 
+	if (currentTime - lastTime >= 1000) 
 	{ 	
 		char str[100];
 		sprintf_s(str, "%s fps:%d", title.c_str(), nbFrames);
 		SDL_SetWindowTitle(window, str);
+		SDL_Log("%s fps:%d", title.c_str(), nbFrames);
 		nbFrames = 0;
-		lastTime += 1.0;
+		lastTime = SDL_GetTicks();
 	}
 #endif
 	return true;

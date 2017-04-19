@@ -144,7 +144,8 @@ void Mesh::Render()
 
 Model::Model(std::string _fileName)
 {
-	Assimp::Importer importer;
+#ifndef ANDROID_BUILD
+    Assimp::Importer importer;
 	const aiScene* scene = importer.ReadFile(_fileName, aiProcess_Triangulate | aiProcess_FlipUVs);
 	if (!scene || scene->mFlags == AI_SCENE_FLAGS_INCOMPLETE || !scene->mRootNode) // if is Not Zero
 	{
@@ -155,8 +156,9 @@ Model::Model(std::string _fileName)
 	directory = _fileName.substr(0, _fileName.find_last_of('/'));
 
 	ProcessNode(scene->mRootNode, scene);
+#endif
 }
-
+#ifndef ANDROID_BUILD
 void Model::ProcessNode(aiNode* node, const aiScene* scene)
 {
 	for (GLuint i = 0; i < node->mNumMeshes; i++)
@@ -243,7 +245,7 @@ Mesh *Model::ProcessMesh(aiMesh* mesh, const aiScene* scene)
 
 	return new Mesh(vertices, indices, layout);
 }
-
+#endif
 void Model::SetTransformation(glm::vec3 _pos, glm::vec3 _rot, glm::vec3 _scale)
 {
 	transform = glm::mat4(1);

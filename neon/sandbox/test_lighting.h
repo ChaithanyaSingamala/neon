@@ -15,7 +15,6 @@ class TestLighting : public Application
 	OrbitCamera *camera = nullptr;
 	bool orbitCameraMouseLock = true;
 	Mesh* testMesh = nullptr;
-	Model* testModel = nullptr;
 	Mesh* testPlaneModel = nullptr;
 	Mesh* testModelLightSource = nullptr;
 	Shader *shader = nullptr;

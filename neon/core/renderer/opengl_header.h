@@ -4,9 +4,11 @@
 #include <EGL/egl.h>
 #include <GLES3/gl3.h>
 #include <GLES3/gl3ext.h>
+#define GLSL_VERSION_STRING		"#version 300 es\n"
 #else
 #define USING_GLAD 1
 #include "glad\glad.h"
+#define GLSL_VERSION_STRING		"#version 140\n"
 #endif
 
 

@@ -1,11 +1,14 @@
 #pragma once
 #include "opengl_header.h"
 #include <vector>
+#include <iostream>
 #include "glm\glm.hpp"
 
+#ifndef ANDROID_BUILD
 #include "assimp/Importer.hpp"
 #include "assimp/scene.h"
 #include "assimp/postprocess.h"
+#endif
 
 struct VertexAttributeInfo
 {
@@ -43,9 +46,11 @@ class Model
 
 public:
 	Model(std::string _fileName);
-	void ProcessNode(aiNode * node, const aiScene * scene);
+#ifndef ANDROID_BUILD
+    void ProcessNode(aiNode * node, const aiScene * scene);
 	Mesh* ProcessMesh(aiMesh * mesh, const aiScene * scene);
-	virtual ~Model();
+#endif
+    virtual ~Model();
 
 	Mesh* GetMesh(int index);
 
