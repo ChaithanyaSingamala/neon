@@ -6,7 +6,9 @@ class Camera: public CameraBase
 {
 	GLfloat lastX = 400, lastY = 300;
 	bool firstMouse = true;
-	bool mouseLock = true;
+	bool freeCameraMouseLock = true;
+	bool orbitCameraMouseLock = true;
+
 public:
 	virtual void HandleKeyInput(int key, int action);
 	virtual void HandleMouseButtonInputs(int button, int action);

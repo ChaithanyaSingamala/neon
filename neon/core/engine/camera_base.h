@@ -30,7 +30,9 @@ public:
 		FORWARD,
 		BACKWARD,
 		LEFT,
-		RIGHT
+		RIGHT,
+		ORBIT_LEFT,
+		ORBIT_RIGHT,
 	};
 	// CameraBase Attributes
 	glm::vec3 Position;

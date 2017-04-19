@@ -3,17 +3,21 @@
 #include "glm\glm.hpp"
 
 class Camera;
-class Model;
+class Mesh;
 class Shader;
 class Texture;
+class Model;
+class OrbitCamera;
 
 class TestLighting : public Application
 {
 
-	Camera *camera = nullptr;
+	OrbitCamera *camera = nullptr;
+	bool orbitCameraMouseLock = true;
+	Mesh* testMesh = nullptr;
 	Model* testModel = nullptr;
-	Model* testPlaneModel = nullptr;
-	Model* testModelLightSource = nullptr;
+	Mesh* testPlaneModel = nullptr;
+	Mesh* testModelLightSource = nullptr;
 	Shader *shader = nullptr;
 	Shader *shaderForLightSource = nullptr;
 	Texture *texture1 = nullptr;

@@ -1,4 +1,5 @@
 #include "camera_base.h"
+#include <iostream>
 
 glm::mat4 CameraBase::GetViewMatrix()
 {
@@ -16,6 +17,20 @@ void CameraBase::ProcessKeyboard(Camera_Movement direction, GLfloat deltaTime)
 		this->Position -= this->Right * velocity;
 	if (direction == RIGHT)
 		this->Position += this->Right * velocity;
+	else if (direction == ORBIT_RIGHT)
+	{
+		Yaw += 1.0f;
+		Position.x = cos(glm::radians(Yaw));
+		Position.z = sin(glm::radians(Yaw));
+		Front = glm::normalize(-Position);
+	}
+	else if (direction == ORBIT_LEFT)
+	{
+		Yaw -= 1.0f;
+		Position.x = cos(glm::radians(Yaw));
+		Position.z = sin(glm::radians(Yaw));
+		Front = glm::normalize(-Position);
+	}
 }
 
 void CameraBase::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolean constrainPitch)
@@ -34,6 +49,8 @@ void CameraBase::ProcessMouseMovement(GLfloat xoffset, GLfloat yoffset, GLboolea
 		if (this->Pitch < -89.0f)
 			this->Pitch = -89.0f;
 	}
+
+	std::cout << Yaw << "   " << Pitch << std::endl;
 
 	// Update Front, Right and Up Vectors using the updated Eular angles
 	this->updateCameraVectors();
