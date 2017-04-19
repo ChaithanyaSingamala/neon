@@ -64,6 +64,9 @@
     <ClInclude Include="..\..\neon\core\engine\camera.h">
       <Filter>engine</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\neon\core\interface\sdl2_interface.h">
+      <Filter>interface</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\neon\core\interface\neon_interface.cpp">
@@ -116,6 +119,9 @@
     </ClCompile>
     <ClCompile Include="..\..\neon\core\engine\camera_base.cpp">
       <Filter>engine</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\neon\core\interface\sdl2_interface.cpp">
+      <Filter>interface</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,7 @@
 #include "glfw_interface.h"
 #include "../engine/common.h"
 #include "../engine/engine.h"
+#include "GLFW\glfw3.h"
 
 
 void GLFWInterface::CalculateUpdateDeltaTime()
@@ -27,7 +28,7 @@ GLFWInterface::~GLFWInterface()
 {
 }
 
-void WindowSizeUpdated(GLFWwindow *window, int newwidth, int newheight)
+void GLFWWindowSizeUpdated(GLFWwindow *window, int newwidth, int newheight)
 {
 	GLFWInterface::get()->Width(newwidth);
 	GLFWInterface::get()->Height(newheight);
@@ -35,23 +36,23 @@ void WindowSizeUpdated(GLFWwindow *window, int newwidth, int newheight)
 	Engine::get()->InterfaceWindowSizeUpdated(newwidth, newheight);
 }
 
-void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
+void GLFWkey_callback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
 	//if (key == GLFW_KEY_E && action == GLFW_PRESS);
 	Engine::get()->HandleKeyInputs(key, action);
 }
-void cursor_pos_callback(GLFWwindow* window, double xpos, double ypos)
+void GLFWcursor_pos_callback(GLFWwindow* window, double xpos, double ypos)
 {
 	Engine::get()->HandleMouseCursorInputs(xpos, ypos);
 }
 
-void mouse_button_callback(GLFWwindow* window, int button, int action, int mods)
+void GLFWmouse_button_callback(GLFWwindow* window, int button, int action, int mods)
 {
 	//if (button == GLFW_MOUSE_BUTTON_RIGHT && action == GLFW_PRESS);
 	Engine::get()->HandleMouseButtonInputs(button, action);
 }
 
-void scroll_callback(GLFWwindow* window, double xoffset, double yoffset)
+void GLFWscroll_callback(GLFWwindow* window, double xoffset, double yoffset)
 {
 	Engine::get()->HandleMouseScrollInputs(xoffset, yoffset);
 }
@@ -82,12 +83,12 @@ bool GLFWInterface::Init()
 		ASSERT("GLFW failed to to create window!");
 	}
 
-	glfwSetWindowSizeCallback(window, WindowSizeUpdated);
+	glfwSetWindowSizeCallback(window, GLFWWindowSizeUpdated);
 
-	glfwSetKeyCallback(window, key_callback);
-	glfwSetCursorPosCallback(window, cursor_pos_callback);
-	glfwSetMouseButtonCallback(window, mouse_button_callback);
-	glfwSetScrollCallback(window, scroll_callback);
+	glfwSetKeyCallback(window, GLFWkey_callback);
+	glfwSetCursorPosCallback(window, GLFWcursor_pos_callback);
+	glfwSetMouseButtonCallback(window, GLFWmouse_button_callback);
+	glfwSetScrollCallback(window, GLFWscroll_callback);
 
 	std::cout << "created window width=" << width << " height=" << height << std::endl;
 	glfwMakeContextCurrent(window);

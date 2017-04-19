@@ -3,6 +3,7 @@
 #include <vector>
 #include <fstream>
 #include "engine.h"
+#include <algorithm>
 
 Common::Common()
 {

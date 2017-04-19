@@ -1,7 +1,7 @@
 #include "test_lighting.h"
 #include "renderer\renderer.h"
 #include "renderer\shader.h"
-#include "renderer\texture.h"
+//#include "renderer\texture.h"
 #include "renderer\model.h"
 #include "engine\camera.h"
 #include "test_objects.h"
@@ -16,7 +16,7 @@ bool TestLighting::Init()
 	//load camera
 	camera = new Camera(glm::vec3(0.0f,0.0f,4.0f));
 	//load texture
-	texture1 = new Texture("resources/textures/texture_4.png");
+	//texture1 = new Texture("resources/textures/texture_4.png");
 	//load models
 	testModel = CreateModelCube();
 	testPlaneModel = CreateModelPlaneXZ(5.0f);
@@ -30,7 +30,8 @@ bool TestLighting::Init()
 		ShaderAttribInfo infos = {
 			{ "vertexPosition", VERT_POS_LOC },
 		};
-		shaderForLightSource = new Shader("resources/shaders/v140/solid.vert", "resources/shaders/v140/solid.frag", infos);
+//		shaderForLightSource = new Shader("resources/shaders/v140/solid.vert", "resources/shaders/v140/solid.frag", infos);
+		shaderForLightSource = new Shader(ShaderCodeLightingVert(), ShaderCodeLightingFrag(), infos);
 		shaderForLightSource->Set();
 		shaderForLightSource->Reset();
 	}
@@ -40,7 +41,8 @@ bool TestLighting::Init()
 			{ "vertexUV", VERT_UV0_LOC },
 			{ "vertexNormal", VERT_NORMAL_LOC },
 		};
-		shader = new Shader("resources/shaders/v140/lighting01.vert", "resources/shaders/v140/lighting01.frag", infos);
+//		shader = new Shader("resources/shaders/v140/lighting01.vert", "resources/shaders/v140/lighting01.frag", infos);
+		shader = new Shader(ShaderCodeLightingVert(), ShaderCodeLightingFrag(), infos);
 		shader->Set();
 		glUniform3fv(shader->GetUniformLocation("lightColor"), 1, glm::value_ptr(glm::vec3(1.0)));
 		glUniform3fv(shader->GetUniformLocation("objectColor"), 1, glm::value_ptr(glm::vec3(1.0f, 0.5f, 0.31f)));
@@ -112,7 +114,7 @@ bool TestLighting::DeInit()
 {
 	delete testModel;
 	delete shader;
-	delete texture1;
+	//delete texture1;
 
 	return false;
 }

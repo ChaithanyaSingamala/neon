@@ -2,22 +2,21 @@
 #include "neon_interface.h"
 #include <string>
 
-struct GLFWwindow;
-
-class GLFWInterface: public NeonInterface
+struct SDL_Window;
+class SDL2Interface: public NeonInterface
 {
 	unsigned short width = 800;
 	unsigned short height = 600;
 	std::string title = "Neon Engine";
 
-	GLFWwindow* window = nullptr;
+	SDL_Window* window = nullptr;
 	double deltaTime = 0.0;
 	virtual void CalculateUpdateDeltaTime();
 	virtual double GetDeltaTime() override;
 
 public:
-	GLFWInterface();
-	virtual ~GLFWInterface();
+	SDL2Interface();
+	virtual ~SDL2Interface();
 
 	virtual bool Init();
 	virtual bool Update();

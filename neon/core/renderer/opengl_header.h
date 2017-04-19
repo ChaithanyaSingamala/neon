@@ -1,5 +1,13 @@
 #pragma once
+
+#ifdef ANDROID_BUILD
+#include <EGL/egl.h>
+#include <GLES3/gl3.h>
+#include <GLES3/gl3ext.h>
+#else
+#define USING_GLAD 1
 #include "glad\glad.h"
+#endif
 
 
 // marcos

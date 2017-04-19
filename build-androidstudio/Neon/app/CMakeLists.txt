@@ -1,11 +1,29 @@
 cmake_minimum_required(VERSION 3.4.1)
 
-add_definitions(-DGL_GLEXT_PROTOTYPES)
+add_definitions(-DGL_GLEXT_PROTOTYPES -DANDROID_BUILD)
 
 file(GLOB SOURCES
-    "src/main/cpp/*.h"
-    "src/main/cpp/*.cpp"
+    "../../../neon/core/engine/main.cpp"
+    "../../../neon/core/engine/engine.cpp"
+    "../../../neon/core/engine/common.cpp"
+    "../../../neon/core/engine/camera_base.cpp"
+    "../../../neon/core/engine/camera.cpp"
+
+    "../../../neon/core/interface/neon_interface.cpp"
+    "../../../neon/core/interface/sdl2_interface.cpp"
+
+    "../../../neon/core/renderer/renderer.cpp"
+    "../../../neon/core/renderer/model.cpp"
+    "../../../neon/core/renderer/model_manager.cpp"
+    "../../../neon/core/renderer/shader.cpp"
+    "../../../neon/core/renderer/texture.cpp"
+
+    "../../../neon/sandbox/application.cpp"
+    "../../../neon/sandbox/test_objects.cpp"
+    "../../../neon/sandbox/test_lighting.cpp"
+
 )
+
 
 file(GLOB SDL_SOURCES
     "src/main/cpp/SDL2/src/*.c"
@@ -42,6 +60,8 @@ file(GLOB SDL_SOURCES
 
 )
 
+include_directories(../../../neon/core)
+include_directories(../../../neon/external/soil)
 include_directories(../../../neon/external/sdl2/include)
 include_directories(../../../neon/external/glm)
 

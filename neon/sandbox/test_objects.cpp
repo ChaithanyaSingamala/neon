@@ -3,6 +3,73 @@
 #include "engine\camera.h"
 #include "renderer\model.h"
 
+char *ShaderCodeLightingVert()
+{
+	char *shaderCode =
+	"#version 140																													  \n"
+	"																																  \n"
+	"in vec3 vertexPosition;																										  \n"
+	"in vec2 vertexUV;																												  \n"
+	"in vec3 vertexNormal;																											  \n"
+	"																																  \n"
+	"uniform mat4 model;																											  \n"
+	"uniform mat4 view;																												  \n"
+	"uniform mat4 proj;																												  \n"
+	"																																  \n"
+	"out vec3 vColor;																												  \n"
+	"out vec2 vUV;																													  \n"
+	"																																  \n"
+	"out vec3 posInWorld;																											  \n"
+	"out vec3 normalInWorld;																										  \n"
+	"																																  \n"
+	"void main()																													  \n"
+	"{																																  \n"
+	"	gl_Position = proj * view * model * vec4(vertexPosition, 1.0);																  \n"
+	"	vUV = vertexUV;																												  \n"
+	"	posInWorld = vec3(model * vec4(vertexPosition, 1.0));																		  \n"
+	"																																  \n"
+	"	// assuming The normal matrix is defined as the transpose of the inverse of the upper-left corner of the model matrix		  \n"
+	"	mat3 normalMatrix = mat3(transpose(inverse(model)));																		  \n"
+	"	normalInWorld = normalMatrix * vertexNormal;																				  \n"
+	"}																																  \n";
+
+	return shaderCode;
+}
+
+char *ShaderCodeLightingFrag()
+{
+	char *lightingFragStr =
+		"#version 140																					\n"
+		"																								\n"
+		"out vec4 fragColor;																			\n"
+		"																								\n"
+		"in vec3 posInWorld;																			\n"
+		"in vec3 normalInWorld;																			\n"
+		"																								\n"
+		"uniform vec3 objectColor;																		\n"
+		"uniform vec3 lightColor;																		\n"
+		"																								\n"
+		"uniform vec3 lightPos;																			\n"
+		"uniform vec3 viewPos;																			\n"
+		"																								\n"
+		"void main()																					\n"
+		"{																								\n"
+		"	vec3 diffuseColor = vec3(0.0);																\n"
+		"	vec3 normal = normalize(normalInWorld);														\n"
+		"	vec3 lightDir = normalize(lightPos - posInWorld);											\n"
+		"	float diffuseFactor = max(dot(normal,lightDir), 0.0);										\n"
+		"	//diffuseColor = diffuseFactor * lightColor;												\n"
+		"																								\n"
+		"	float specularStrength = 0.5;																\n"
+		"	float shininess = 32.0;																		\n"
+		"	vec3 viewDir = normalize(viewPos - posInWorld);												\n"
+		"	vec3 reflectDir = reflect(lightDir, normal);												\n"
+		"	float specFactor = pow(max(dot(viewDir,reflectDir), 0.0), shininess);						\n"
+		"																								\n"
+		"	fragColor = vec4(objectColor * (specFactor + diffuseFactor) * lightColor, 1.0);				\n"
+		"}																								\n";
+	return lightingFragStr;
+}
 Model * CreateModelCube()
 {
 	Model *model = 0;

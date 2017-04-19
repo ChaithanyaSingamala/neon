@@ -3,6 +3,7 @@
 #include <algorithm>
 #include "../engine/common.h"
 #include "glfw_interface.h"
+#include "sdl2_interface.h"
 
 NeonInterface::NeonInterface()
 {
@@ -16,14 +17,19 @@ NeonInterface::~NeonInterface()
 NeonInterface* NeonInterface::CreateNeonWindow()
 {
 	NeonInterface* instance = nullptr;
-	std::string windowOptStr = GetFromCommandOption("-window");
+#ifdef ANDROID_BUILD
+    {
+		instance = new SDL2Interface();
+	}
+#else
+    std::string windowOptStr = GetFromCommandOption("-window");
 	if (windowOptStr == "glfw")
 	{
 		instance = new GLFWInterface();
 	}
-	else if (windowOptStr == "sld")
+	else if (windowOptStr == "sdl2")
 	{
-		ASSERT("SDL not supported!");
+		instance = new SDL2Interface();
 	}
 	else if (windowOptStr == "fbdev")
 	{
@@ -31,9 +37,10 @@ NeonInterface* NeonInterface::CreateNeonWindow()
 	}
 	else
 	{
-		std::cout << "No window system defined using GLFW" << std::endl;
-		instance = new GLFWInterface();
+		std::cout << "No window system defined using SLD2" << std::endl;
+		instance = new SDL2Interface();
 	}
+#endif
 
 	if (instance)
 		instance->Init();

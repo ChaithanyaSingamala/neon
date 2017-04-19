@@ -1,7 +1,15 @@
 #include <iostream>
 #include "engine.h"
 
-int main(int argc, char **argv)
+#ifdef ANDROID_BUILD
+#include <SDL.h>
+#define MAIN_FUNCTION	SDL_main
+#else
+#define MAIN_FUNCTION	main
+#endif
+
+
+int MAIN_FUNCTION(int argc, char **argv)
 {
 	std::cout << "starting with neon engine... " << std::endl;
 

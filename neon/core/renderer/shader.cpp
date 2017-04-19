@@ -16,9 +16,33 @@ Shader::Shader(std::string _vertexShaderFile, std::string _fragmentShaderFile)
 
 	glLinkProgram(programId);
 
+
+#if USING_GLAD
 	if (!CheckStatus(programId, glGetProgramiv, glGetProgramInfoLog, GL_LINK_STATUS))
 		ASSERT("failed to compile shader");
+#endif
 
+}
+
+Shader::Shader(const GLchar * _shaderCodeVert, const GLchar * _shaderCodeFrag, ShaderAttribInfo vertexAttributeLocs)
+{
+	vertShaderId = CompileShaderCode(_shaderCodeVert, GL_VERTEX_SHADER);
+	fragShaderId = CompileShaderCode(_shaderCodeFrag, GL_FRAGMENT_SHADER);
+
+	programId = glCreateProgram();
+	glAttachShader(programId, vertShaderId);
+	glAttachShader(programId, fragShaderId);
+
+	for (auto info : vertexAttributeLocs)
+		glBindAttribLocation(programId, info.second, info.first.c_str());
+
+	glLinkProgram(programId);
+
+
+#if USING_GLAD
+	if (!CheckStatus(programId, glGetProgramiv, glGetProgramInfoLog, GL_LINK_STATUS))
+		ASSERT("failed to compile shader");
+#endif
 }
 
 Shader::Shader(std::string _vertexShaderFile, std::string _fragmentShaderFile, ShaderAttribInfo vertexAttributeLocs)
@@ -38,8 +62,11 @@ Shader::Shader(std::string _vertexShaderFile, std::string _fragmentShaderFile, S
 
 	glLinkProgram(programId);
 
+
+#if USING_GLAD
 	if (!CheckStatus(programId, glGetProgramiv, glGetProgramInfoLog, GL_LINK_STATUS))
 		ASSERT("failed to compile shader");
+#endif
 
 }
 
@@ -79,6 +106,7 @@ void Shader::Reset()
 	glUseProgram(0);
 }
 
+#if USING_GLAD
 bool Shader::CheckStatus(GLuint objectID, PFNGLGETSHADERIVPROC objectPropertyGetterFunc, PFNGLGETSHADERINFOLOGPROC getInfoLogFunc, GLenum statusType)
 {
 	GLint status;
@@ -97,6 +125,7 @@ bool Shader::CheckStatus(GLuint objectID, PFNGLGETSHADERIVPROC objectPropertyGet
 	}
 	return true;
 }
+#endif
 GLuint Shader::CompileShaderCode(const GLchar * _shaderCode, GLuint _shaderType)
 {
 	GLuint shaderId = glCreateShader(_shaderType);
@@ -104,7 +133,10 @@ GLuint Shader::CompileShaderCode(const GLchar * _shaderCode, GLuint _shaderType)
 	glShaderSource(shaderId, 1, code, 0);
 	glCompileShader(shaderId);
 
-	if (!CheckStatus(shaderId, glGetShaderiv, glGetShaderInfoLog, GL_COMPILE_STATUS))
+
+#if USING_GLAD
+    	if (!CheckStatus(shaderId, glGetShaderiv, glGetShaderInfoLog, GL_COMPILE_STATUS))
 		ASSERT("failed to compile shader");
+#endif
 	return shaderId;
 }

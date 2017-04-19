@@ -1,6 +1,8 @@
 #include "renderer.h"
 #include "../engine/common.h"
 #include <iostream>
+#include <string>
+#include <sstream>
 #include "interface\neon_interface.h"
 
 #ifdef GLAD_DEBUG
@@ -40,16 +42,34 @@ void Renderer::SetViewport(GLushort x, GLushort y, GLushort width, GLushort heig
 
 void Renderer::Init()
 {
+#if USING_GLAD
 	if (!gladLoadGL()) 
 		ASSERT("GLAD failed to load!");
+#endif
 #ifdef GLAD_DEBUG
 	glad_set_pre_callback(pre_gl_call);
 	glad_debug_glClear = glad_glClear;
 #endif
-	std::cout<<"OpenGL "<<GLVersion.major<<GLVersion.minor<<std::endl;
-	std::cout<<"OpenGL "<<glGetString(GL_VERSION)<<", GLSL "<< glGetString(GL_SHADING_LANGUAGE_VERSION) << std::endl;
 	
+	/* Query OpenGL device information */
+	const GLubyte* renderer = glGetString(GL_RENDERER);
+	const GLubyte* vendor = glGetString(GL_VENDOR);
+	const GLubyte* version = glGetString(GL_VERSION);
+	const GLubyte* glslVersion = glGetString(GL_SHADING_LANGUAGE_VERSION);
 
+	GLint major, minor;
+	glGetIntegerv(GL_MAJOR_VERSION, &major);
+	glGetIntegerv(GL_MINOR_VERSION, &minor);
+
+	std::stringstream ss;
+	ss << "\n-------------------------------------------------------------\n";
+	ss << "GL Vendor    : " << vendor;
+	ss << "\nGL GLRenderer : " << renderer;
+	ss << "\nGL Version   : " << version;
+	ss << "\nGL Version   : " << major << "." << minor;
+	ss << "\nGLSL Version : " << glslVersion;
+	ss << "\n-------------------------------------------------------------\n";
+	printf("%s", ss.str().c_str());
 
 }
 

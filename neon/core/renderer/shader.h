@@ -14,12 +14,15 @@ class Shader
 	
 	std::map<std::string, GLint> uniformInfos;
 
+#if USING_GLAD
 	bool CheckStatus(GLuint objectID, PFNGLGETSHADERIVPROC objectPropertyGetterFunc, PFNGLGETSHADERINFOLOGPROC getInfoLogFunc, GLenum statusType);
+#endif
 	GLuint	CompileShaderCode(const GLchar *_shaderCode, GLuint _shaderType);
 public:
 	
 	Shader(std::string _vertexShaderFile, std::string _fragmentShaderFile);
 	Shader(std::string _vertexShaderFile, std::string _fragmentShaderFile, ShaderAttribInfo vertexAttributeLocs);
+	Shader(const GLchar *_shaderCode, const GLchar * _shaderCodeFrag, ShaderAttribInfo vertexAttributeLocs);
 	virtual ~Shader();
 
 	GLint GetUniformLocation(std::string _uniform);
