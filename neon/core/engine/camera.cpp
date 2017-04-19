@@ -4,7 +4,7 @@
 
 void Camera::HandleKeyInput(int key, int action)
 {
-	if (action == 2)
+	if (action > 0)
 	{
 		switch (key)
 		{
@@ -15,14 +15,14 @@ void Camera::HandleKeyInput(int key, int action)
 			ProcessKeyboard(BACKWARD, (GLfloat)Engine::get()->GetDeltaTime());
 			break;
 		case 65://a
-			ProcessKeyboard(LEFT, (GLfloat)Engine::get()->GetDeltaTime());
+			ProcessKeyboard(ORBIT_LEFT, (GLfloat)Engine::get()->GetDeltaTime());
 			break;
 		case 68://d
-			ProcessKeyboard(RIGHT, (GLfloat)Engine::get()->GetDeltaTime());
+			ProcessKeyboard(ORBIT_RIGHT, (GLfloat)Engine::get()->GetDeltaTime());
 			break;
 		case 341:	//left ctl
 		case 345:	//right ctl
-			mouseLock = false;
+			freeCameraMouseLock = false;
 			break;
 
 		}
@@ -33,7 +33,7 @@ void Camera::HandleKeyInput(int key, int action)
 		{
 		case 341:	//left ctl
 		case 345:	//right ctl
-			mouseLock = true;
+			freeCameraMouseLock = true;
 			break;
 		}
 	}
@@ -43,7 +43,7 @@ void Camera::HandleKeyInput(int key, int action)
 		{
 		case 341:	//left ctl
 		case 345:	//right ctl
-			mouseLock = false;
+			freeCameraMouseLock = false;
 			break;
 		}
 	}
@@ -52,13 +52,28 @@ void Camera::HandleKeyInput(int key, int action)
 
 void Camera::HandleMouseButtonInputs(int button, int action)
 {
-	//std::cout << "mouse button " << button << " " << action << " " << std::endl;
+	if (button == 1)
+	{
+		if (action == 1)
+			freeCameraMouseLock = false;
+		else
+			freeCameraMouseLock = true;
+	}
+	if (button == 0)
+	{
+		if (action == 1)
+			orbitCameraMouseLock = false;
+		else
+			orbitCameraMouseLock = true;
+	}
+	std::cout << "mouse button " << button << " " << action << " " << std::endl;
 }
 
 void Camera::HandleMouseScrollInputs(double xoffset, double yoffset)
 {
-	if(!mouseLock)
+	if(!freeCameraMouseLock)
 		ProcessMouseScroll((GLfloat)yoffset);
+
 	//std::cout << "mouse scroll " << xoffset << " " << yoffset << " " << std::endl;
 }
 
@@ -77,10 +92,13 @@ void Camera::HandleMouseCursorInputs(double xpos, double ypos)
 	lastX = (GLfloat)xpos;
 	lastY = (GLfloat)ypos;
 
-	if (!mouseLock)
+	if (!freeCameraMouseLock)
 	{
 		ProcessMouseMovement((GLfloat)xoffset, (GLfloat)yoffset);
 	}
+	//if (!orbitCameraMouseLock)
+	//	ProcessMouseMovementCameraOrbit((GLfloat)xoffset, (GLfloat)yoffset);
+
 	//std::cout << "mouse cursor " << xpos << " " << ypos << " " << std::endl;
 }
 

@@ -138,6 +138,7 @@
     <ClInclude Include="..\..\neon\core\engine\camera_base.h" />
     <ClInclude Include="..\..\neon\core\engine\common.h" />
     <ClInclude Include="..\..\neon\core\engine\engine.h" />
+    <ClInclude Include="..\..\neon\core\engine\orbit_camera.h" />
     <ClInclude Include="..\..\neon\core\glad\glad.h" />
     <ClInclude Include="..\..\neon\core\glad\khrplatform.h" />
     <ClInclude Include="..\..\neon\core\interface\glfw_interface.h" />
@@ -161,6 +162,7 @@
     <ClCompile Include="..\..\neon\core\engine\common.cpp" />
     <ClCompile Include="..\..\neon\core\engine\engine.cpp" />
     <ClCompile Include="..\..\neon\core\engine\main.cpp" />
+    <ClCompile Include="..\..\neon\core\engine\orbit_camera.cpp" />
     <ClCompile Include="..\..\neon\core\glad\glad.c" />
     <ClCompile Include="..\..\neon\core\interface\glfw_interface.cpp" />
     <ClCompile Include="..\..\neon\core\interface\neon_interface.cpp" />

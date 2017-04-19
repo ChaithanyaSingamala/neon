@@ -7,11 +7,13 @@ class Mesh;
 class Shader;
 class Texture;
 class Model;
+class OrbitCamera;
 
 class TestLighting : public Application
 {
 
-	Camera *camera = nullptr;
+	OrbitCamera *camera = nullptr;
+	bool orbitCameraMouseLock = true;
 	Mesh* testMesh = nullptr;
 	Model* testModel = nullptr;
 	Mesh* testPlaneModel = nullptr;

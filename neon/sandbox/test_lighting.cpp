@@ -5,6 +5,7 @@
 #include "renderer\model.h"
 #include "engine\camera.h"
 #include "test_objects.h"
+#include "engine\orbit_camera.h"
 
 #include "glm\gtc\type_ptr.hpp"
 
@@ -14,7 +15,8 @@
 bool TestLighting::Init()
 {
 	//load camera
-	camera = new Camera(glm::vec3(0.0f,0.0f,4.0f));
+//	camera = new Camera(glm::vec3(0.0f, 0.0f, 4.0f));
+	camera = new OrbitCamera();
 	//load texture
 	texture1 = new Texture("resources/textures/texture_4.png");
 	//load models
@@ -91,6 +93,7 @@ glm::mat3 CalculateNormalMatrix(glm::mat4 _modelMatrix, Shader *_shader)
 
 bool TestLighting::Render()
 {
+	camera->Orbit(1.0f);
 	glClearColor(0.3f, 0.1f, 0.3f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glm::vec3 newLightPos = glm::vec3(0);
@@ -159,25 +162,28 @@ bool TestLighting::DeInit()
 
 void TestLighting::HandleKeyInput(int key, int action)
 {
-	camera->HandleKeyInput(key, action);
 	//std::cout << "key " << key << " " << action << " " << std::endl;
 }
 
 void TestLighting::HandleMouseButtonInputs(int button, int action)
 {
-	camera->HandleMouseButtonInputs(button, action);
+	if (button == 0)
+	{
+		if (action == 1)
+			orbitCameraMouseLock = false;
+		else
+			orbitCameraMouseLock = true;
+	}
 	//std::cout << "mouse button " << button << " " << action << " " << std::endl;
 }
 
 void TestLighting::HandleMouseScrollInputs(double xoffset, double yoffset)
 {
-	camera->HandleMouseScrollInputs(xoffset, yoffset);
 	//std::cout << "mouse scroll " << xoffset << " " << yoffset << " " << std::endl;
 }
 
 void TestLighting::HandleMouseCursorInputs(double xpos, double ypos)
 {
-	camera->HandleMouseCursorInputs(xpos, ypos);
 	//std::cout << "mouse cursor " << xpos << " " << ypos << " " << std::endl;
 }
 
