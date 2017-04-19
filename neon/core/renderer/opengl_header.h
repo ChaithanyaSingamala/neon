@@ -10,12 +10,17 @@
 #endif
 
 
-// marcos
-#define VERT_POS_LOC	     0
-#define VERT_COLOR_LOC	     1
-#define VERT_NORMAL_LOC      2
-#define VERT_UV0_LOC	     3
-#define VERT_UV1_LOC	     4
+enum
+{
+	VERT_POS_LOC = 0,
+	VERT_COLOR_LOC,
+	VERT_NORMAL_LOC,
+	VERT_UV0_LOC,
+	VERT_UV1_LOC,
+
+	VERT_ATTRIB_MAX
+};
+
 
 
 

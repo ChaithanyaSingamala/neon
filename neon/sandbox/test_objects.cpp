@@ -2,6 +2,7 @@
 #include "renderer\renderer.h"
 #include "engine\camera.h"
 #include "renderer\model.h"
+#include "renderer\shader.h"
 
 char *ShaderCodeLightingVert()
 {
@@ -70,7 +71,7 @@ char *ShaderCodeLightingFrag()
 		"}																								\n";
 	return lightingFragStr;
 }
-Model * CreateModelCube()
+Model * CreateModelCube(Shader *_shader)
 {
 	Model *model = 0;
 
@@ -126,15 +127,15 @@ Model * CreateModelCube()
 	}
 
 	ModelDataLayout layout;
-	layout.position = { GL_TRUE, VERT_POS_LOC, 0, 8, 3 };
-	layout.normal = { GL_TRUE, VERT_NORMAL_LOC, 3, 8, 3 };
-	layout.uv = { GL_TRUE, VERT_UV0_LOC, 6, 8, 2 };
+	layout.position = { GL_TRUE, _shader->GetAttribLocation(VERT_POS_LOC), 0, 8, 3 };
+	layout.normal = { GL_TRUE, _shader->GetAttribLocation(VERT_NORMAL_LOC), 3, 8, 3 };
+	layout.uv = { GL_TRUE, _shader->GetAttribLocation(VERT_UV0_LOC), 6, 8, 2 };
 	model = new Model(vertexArray, indices, layout);
 
 	return model;
 }
 
-Model * CreateModelPlaneXZ(float _size, float _yOffset)
+Model * CreateModelPlaneXZ(Shader *_shader, float _size, float _yOffset)
 {
 	Model *model = 0;
 
@@ -155,9 +156,9 @@ Model * CreateModelPlaneXZ(float _size, float _yOffset)
 	}
 
 	ModelDataLayout layout;
-	layout.position = { GL_TRUE, VERT_POS_LOC, 0, 8, 3 };
-	layout.normal = { GL_TRUE, VERT_NORMAL_LOC, 3, 8, 3 };
-	layout.uv = { GL_TRUE, VERT_UV0_LOC, 6, 8, 2 };
+	layout.position = { GL_TRUE, _shader->GetAttribLocation(VERT_POS_LOC), 0, 8, 3 };
+	layout.normal = { GL_TRUE, _shader->GetAttribLocation(VERT_NORMAL_LOC), 3, 8, 3 };
+	layout.uv = { GL_TRUE, _shader->GetAttribLocation(VERT_UV0_LOC), 6, 8, 2 };
 	model = new Model(vertexArray, indices, layout);
 
 	return model;

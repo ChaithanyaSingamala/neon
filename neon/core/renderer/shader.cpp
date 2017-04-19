@@ -16,6 +16,9 @@ Shader::Shader(std::string _vertexShaderFile, std::string _fragmentShaderFile)
 
 	glLinkProgram(programId);
 
+	for (auto v : attrribLocations)
+		v = -1;
+
 
 #if USING_GLAD
 	if (!CheckStatus(programId, glGetProgramiv, glGetProgramInfoLog, GL_LINK_STATUS))
@@ -34,7 +37,9 @@ Shader::Shader(const GLchar * _shaderCodeVert, const GLchar * _shaderCodeFrag, S
 	glAttachShader(programId, fragShaderId);
 
 	for (auto info : vertexAttributeLocs)
-		glBindAttribLocation(programId, info.second, info.first.c_str());
+	{
+		attrribLocations[info.second] = glGetAttribLocation(programId, info.first.c_str());
+	}
 
 	glLinkProgram(programId);
 
@@ -90,6 +95,12 @@ GLint Shader::GetUniformLocation(std::string _uniform)
 		locPlusOne = uniformInfos[_uniform.c_str()] = glGetUniformLocation(programId, _uniform.c_str()) + 1;
 	return locPlusOne - 1;
 }
+
+GLint Shader::GetAttribLocation(GLint _attrib)
+{
+	return attrribLocations[_attrib];
+}
+
 
 void Shader::UpdateUniform(std::string _uniform, GLint value)
 {

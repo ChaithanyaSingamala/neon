@@ -17,14 +17,7 @@ bool TestLighting::Init()
 	camera = new Camera(glm::vec3(0.0f,0.0f,4.0f));
 	//load texture
 	//texture1 = new Texture("resources/textures/texture_4.png");
-	//load models
-	testModel = CreateModelCube();
-	testPlaneModel = CreateModelPlaneXZ(5.0f);
-	
-	//light source
-	lightPos = glm::vec3(1.5f, 0.0f, 0.0f);
-	testModelLightSource = CreateModelCube();
-	
+
 	//load shaders
 	{
 		ShaderAttribInfo infos = {
@@ -48,6 +41,16 @@ bool TestLighting::Init()
 		glUniform3fv(shader->GetUniformLocation("objectColor"), 1, glm::value_ptr(glm::vec3(1.0f, 0.5f, 0.31f)));
 		shader->Reset();
 	}
+
+	//load models
+	testModel = CreateModelCube(shader);
+	testPlaneModel = CreateModelPlaneXZ(shader, 5.0f);
+
+	//light source
+	lightPos = glm::vec3(1.5f, 0.0f, 0.0f);
+	testModelLightSource = CreateModelCube(shaderForLightSource);
+
+
 
 	glEnable(GL_DEPTH_TEST);
 

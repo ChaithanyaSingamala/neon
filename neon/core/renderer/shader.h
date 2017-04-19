@@ -14,6 +14,8 @@ class Shader
 	
 	std::map<std::string, GLint> uniformInfos;
 
+	GLint attrribLocations[VERT_ATTRIB_MAX];
+
 #if USING_GLAD
 	bool CheckStatus(GLuint objectID, PFNGLGETSHADERIVPROC objectPropertyGetterFunc, PFNGLGETSHADERINFOLOGPROC getInfoLogFunc, GLenum statusType);
 #endif
@@ -26,6 +28,7 @@ public:
 	virtual ~Shader();
 
 	GLint GetUniformLocation(std::string _uniform);
+	GLint GetAttribLocation(GLint _attrib);
 	void UpdateUniform(std::string _uniform, GLint value);
 	void Set();
 	void Reset();

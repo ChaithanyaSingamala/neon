@@ -6,12 +6,12 @@
 struct VertexAttributeInfo
 {
 	GLboolean isSet = GL_FALSE;
-	GLubyte locationId = 0;
+	GLint locationId = 0;
 	GLubyte start = 0;
 	GLubyte offset = 0;
 	GLubyte size = 0;
 	VertexAttributeInfo() {}
-	VertexAttributeInfo(GLboolean _isSet, GLubyte _locationId, GLubyte _start, GLubyte _offset, GLubyte _size):
+	VertexAttributeInfo(GLboolean _isSet, GLint _locationId, GLubyte _start, GLubyte _offset, GLubyte _size):
 		isSet(_isSet),
 		locationId(_locationId),
 		start(_start),
