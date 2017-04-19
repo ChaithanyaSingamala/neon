@@ -111,8 +111,25 @@ bool SDL2Interface::Update()
 		{
 			ExitApplication();
 		}
+		if (event.type == SDL_KEYDOWN)
+		{
+			if (event.key.keysym.sym == SDLK_AC_BACK)
+			{
+				ExitApplication();
+			}
+		}
 		else if (event.type == SDL_FINGERDOWN || event.type == SDL_FINGERMOTION || event.type == SDL_FINGERMOTION)
 		{
+			SDL_TouchID device = SDL_GetTouchDevice(0);
+			std::vector<SDL_Finger *> arnold(SDL_GetNumTouchFingers(device));
+			for (int i = 0; i < SDL_GetNumTouchFingers(device); i++)
+			{
+				//SDL *FINGER
+				arnold[i] = SDL_GetTouchFinger(device, i);
+				SDL_Log("%d %d [%f %f] [%f]", i, arnold[i]->id, arnold[i]->x, arnold[i]->y, arnold[i]->pressure);
+			}
+			//SDL_TouchFingerEvent t = event.tfinger;
+			//SDL_Log("%d %d %d [%f,%f] [%f %f] [%f]", t.timestamp, t.touchId, t.fingerId, t.x, t.y, t.dx, t.dy, t.pressure);
 			// no implementation right now
 		}
 	}		

@@ -11,6 +11,7 @@ import java.lang.reflect.Method;
 
 import android.app.*;
 import android.content.*;
+import android.support.v4.view.GestureDetectorCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType;
 import android.view.*;
@@ -30,6 +31,7 @@ import android.graphics.drawable.Drawable;
 import android.media.*;
 import android.hardware.*;
 import android.content.pm.ActivityInfo;
+import android.widget.Toast;
 
 
 public class SDLActivity extends AppCompatActivity {
@@ -1040,7 +1042,78 @@ class SDLMain implements Runnable {
  Because of this, that's where we set up the SDL thread
  */
 class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
-        View.OnKeyListener, View.OnTouchListener, SensorEventListener  {
+        View.OnKeyListener, View.OnTouchListener, SensorEventListener , GestureDetector.OnGestureListener {
+
+    private static final String DEBUG_TAG = "Gestures";
+    private GestureDetectorCompat mDetector;
+
+    @Override
+    public boolean onTouchEvent(MotionEvent event){
+        this.mDetector.onTouchEvent(event);
+        // Be sure to call the superclass implementation
+        return super.onTouchEvent(event);
+    }
+
+    @Override
+    public boolean onDown(MotionEvent event) {
+        Log.d(DEBUG_TAG,"onDown: " + event.toString());
+        return true;
+    }
+
+    @Override
+    public void onShowPress(MotionEvent motionEvent) {
+
+    }
+
+    @Override
+    public boolean onSingleTapUp(MotionEvent motionEvent) {
+        return false;
+    }
+
+    @Override
+    public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
+        return false;
+    }
+
+    @Override
+    public void onLongPress(MotionEvent motionEvent) {
+
+    }
+    static final int SWIPE_MIN_DISTANCE = 120;
+    static final int SWIPE_MAX_OFF_PATH = 250;
+    static final int SWIPE_THRESHOLD_VELOCITY = 200;
+
+    @Override
+    public boolean onFling(MotionEvent e1, MotionEvent e2,
+                           float velocityX, float velocityY) {
+        Log.d(DEBUG_TAG, "onFling: " + velocityX + "     " + velocityY + "     " + e1.toString()+e2.toString());
+
+        if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH) {
+            if (Math.abs(e1.getX() - e2.getX()) > SWIPE_MAX_OFF_PATH
+                    || Math.abs(velocityY) < SWIPE_THRESHOLD_VELOCITY) {
+                return false;
+            }
+            if (e1.getY() - e2.getY() > SWIPE_MIN_DISTANCE) {
+                Toast.makeText(getContext(), "bottomToTop",  Toast.LENGTH_SHORT).show();
+            } else if (e2.getY() - e1.getY() > SWIPE_MIN_DISTANCE) {
+                Toast.makeText(getContext(), "topToBottom",  Toast.LENGTH_SHORT).show();
+            }
+        } else {
+            if (Math.abs(velocityX) < SWIPE_THRESHOLD_VELOCITY) {
+                return false;
+            }
+            if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE) {
+                Toast.makeText(getContext(), "swipe RightToLeft",  Toast.LENGTH_SHORT).show();
+             } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE) {
+                Toast.makeText(getContext(), "swipe LeftToright",  Toast.LENGTH_SHORT).show();
+            }
+        }
+
+        return true;
+
+
+    }
+
 
     // Sensors
     protected static SensorManager mSensorManager;
@@ -1059,6 +1132,8 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
         requestFocus();
         setOnKeyListener(this);
         setOnTouchListener(this);
+
+        mDetector = new GestureDetectorCompat(context,this);
 
         mDisplay = ((WindowManager)context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay();
         mSensorManager = (SensorManager)context.getSystemService(Context.SENSOR_SERVICE);
@@ -1291,6 +1366,9 @@ class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
     // Touch events
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+
+        this.mDetector.onTouchEvent(event);
+
         /* Ref: http://developer.android.com/training/gestures/multi.html */
         final int touchDevId = event.getDeviceId();
         final int pointerCount = event.getPointerCount();
