@@ -4,8 +4,6 @@
 #include <SDL.h>
 #include <string>
 
-SDL_GLContext sdlGL = 0;
-
 void SDL2Interface::CalculateUpdateDeltaTime()
 {
 	static Uint32 lastTime = SDL_GetTicks();
@@ -157,6 +155,9 @@ bool SDL2Interface::Update()
 
 bool SDL2Interface::DeInit()
 {
-	
+	SDL_GL_DeleteContext(sdlGL);
+	SDL_DestroyWindow(window);
+	SDL_Quit();
+
 	return true;
 }

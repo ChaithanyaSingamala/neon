@@ -10,6 +10,7 @@ class SDL2Interface: public NeonInterface
 	std::string title = "Neon Engine";
 
 	SDL_Window* window = nullptr;
+	void *sdlGL = nullptr;
 	double deltaTime = 0.0;
 	virtual void CalculateUpdateDeltaTime();
 	virtual double GetDeltaTime() override;
