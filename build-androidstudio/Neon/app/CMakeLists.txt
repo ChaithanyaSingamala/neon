@@ -25,6 +25,11 @@ file(GLOB SOURCES
 
 )
 
+file(GLOB SOIL_SOURCES
+    "../../../neon/external/soil/src/*.c"
+)
+
+
 
 file(GLOB SDL_SOURCES
     "src/main/cpp/SDL2/src/*.c"
@@ -60,8 +65,6 @@ file(GLOB SDL_SOURCES
 
 )
 
- #   "src/main/cpp/SDL2/src/test/*.c"
-
 
 include_directories(../../../neon/core)
 include_directories(../../../neon/external/soil)
@@ -74,6 +77,7 @@ add_library(
 
              ${SOURCES}
              ${SDL_SOURCES}
+             ${SOIL_SOURCES}
 
              )
 

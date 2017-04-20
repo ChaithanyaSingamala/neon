@@ -18,6 +18,8 @@ typedef void (* PFNGLGETSHADERIVPROC)(GLuint shader, GLenum pname, GLint *params
 typedef void (* PFNGLGETSHADERINFOLOGPROC)(GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
 #endif
 
+#define APIENTRY	
+#define APIENTRYP
 
 enum
 {
