@@ -10,7 +10,7 @@ Thanks to https://learnopengl.com
 #include <vector>
 
 // GL Includes
-#include "renderer\opengl_header.h"
+#include "defines.h"
 #include "glm/glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 

@@ -1,6 +1,6 @@
 #include "model.h"
 #include "engine\common.h"
-#include "renderer\opengl_header.h"
+#include "engine\defines.h"
 #include "glm\gtc\matrix_transform.hpp"
 
 

@@ -137,6 +137,7 @@
     <ClInclude Include="..\..\neon\core\engine\camera.h" />
     <ClInclude Include="..\..\neon\core\engine\camera_base.h" />
     <ClInclude Include="..\..\neon\core\engine\common.h" />
+    <ClInclude Include="..\..\neon\core\engine\defines.h" />
     <ClInclude Include="..\..\neon\core\engine\engine.h" />
     <ClInclude Include="..\..\neon\core\engine\orbit_camera.h" />
     <ClInclude Include="..\..\neon\core\glad\glad.h" />

@@ -70,6 +70,9 @@
     <ClInclude Include="..\..\neon\core\interface\sdl2_interface.h">
       <Filter>interface</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\neon\core\engine\defines.h">
+      <Filter>engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\neon\core\interface\neon_interface.cpp">

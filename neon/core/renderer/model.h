@@ -1,5 +1,5 @@
 #pragma once
-#include "opengl_header.h"
+#include "engine\defines.h"
 #include <vector>
 #include <iostream>
 #include "glm\glm.hpp"

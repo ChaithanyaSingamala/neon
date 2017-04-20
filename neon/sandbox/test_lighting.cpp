@@ -21,13 +21,7 @@ bool TestLighting::Init()
 
 	//load shaders
 	{
-		ShaderAttribInfo infos = {
-			{ "vertexPosition", VERT_POS_LOC },
-			{ "vertexUV", VERT_UV0_LOC },
-			{ "vertexNormal", VERT_NORMAL_LOC },
-		};
-//		shaderForLightSource = new Shader("resources/shaders/v140/solid.vert", "resources/shaders/v140/solid.frag", infos);
-		shaderForLightSource = new Shader(ShaderCodeLightingVert(), ShaderCodeLightingFrag(), infos);
+		shaderForLightSource = new Shader(SHADER_RESOURCE("solid.vert"), SHADER_RESOURCE("solid.frag"));
 		shaderForLightSource->Set();
 		shaderForLightSource->Reset();
 	}
@@ -37,8 +31,7 @@ bool TestLighting::Init()
 			{ "vertexUV", VERT_UV0_LOC },
 			{ "vertexNormal", VERT_NORMAL_LOC },
 		};
-//		shader = new Shader("resources/shaders/v140/lighting01.vert", "resources/shaders/v140/lighting01.frag", infos);
-		shader = new Shader(ShaderCodeLightingVert(), ShaderCodeLightingFrag(), infos);
+		shader = new Shader(SHADER_RESOURCE("lighting01.vert"), SHADER_RESOURCE("lighting01.frag"));
 		shader->Set();
 		glUniform3fv(shader->GetUniformLocation("lightColor"), 1, glm::value_ptr(glm::vec3(1.0)));
 		glUniform3fv(shader->GetUniformLocation("objectColor"), 1, glm::value_ptr(glm::vec3(1.0f, 0.5f, 0.31f)));

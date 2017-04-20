@@ -1,6 +1,6 @@
 #pragma once
 #include <iostream>
-#include "opengl_header.h"
+#include "engine\defines.h"
 
 class Texture
 {

@@ -1,8 +1,12 @@
 #pragma once
-#include "opengl_header.h"
+#include "engine\defines.h"
 #include <string>
 #include <vector>
 #include <map>
+
+#define SHADER_RES_DIR	"shaders/"
+#define SHADER_RESOURCE(x)		RESOURCES_PATH SHADER_RES_DIR GLSL_VERSION PATH_SEPRATER x
+
 
 typedef std::vector<std::pair<std::string, GLushort>> ShaderAttribInfo;
 
@@ -16,16 +20,17 @@ class Shader
 
 	GLint attrribLocations[VERT_ATTRIB_MAX];
 
-#if USING_GLAD
 	bool CheckStatus(GLuint objectID, PFNGLGETSHADERIVPROC objectPropertyGetterFunc, PFNGLGETSHADERINFOLOGPROC getInfoLogFunc, GLenum statusType);
-#endif
-	GLuint	CompileShaderCode(const GLchar *_shaderCode, GLuint _shaderType);
+	GLuint	CompileShaderCode(std::string _shaderCode, GLuint _shaderType);
 public:
 	
-	Shader(std::string _vertexShaderFile, std::string _fragmentShaderFile);
+	Shader();
 	Shader(std::string _vertexShaderFile, std::string _fragmentShaderFile, ShaderAttribInfo vertexAttributeLocs);
-	Shader(const GLchar *_shaderCode, const GLchar * _shaderCodeFrag, ShaderAttribInfo vertexAttributeLocs);
+	Shader(std::string _vertexShaderFile, std::string _fragmentShaderFile);
 	virtual ~Shader();
+
+	void CompileShaderCode(std::string _shaderCodeVert, std::string _shaderCodeFrag);
+	void InitAttribLocations(ShaderAttribInfo _vertexAttributeLocs);
 
 	GLint GetUniformLocation(std::string _uniform);
 	GLint GetAttribLocation(GLint _attrib);

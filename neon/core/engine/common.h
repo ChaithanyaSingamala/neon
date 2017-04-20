@@ -17,3 +17,4 @@ void ASSERT(char *str);
 #endif
 std::string GetFromCommandOption(std::string _for_value);
 std::string ReadFromFile(std::string _filename);
+
