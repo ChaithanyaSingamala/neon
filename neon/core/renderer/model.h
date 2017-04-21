@@ -67,6 +67,8 @@ public:
 
 class Mesh
 {
+	static bool isGlobalWireFrame;
+	bool isWireFrame = false;
 	GLuint voaId = 0;
 	GLuint vertexCount = 0;
 	std::vector<GLuint> vbos;
@@ -87,6 +89,9 @@ public:
 	Mesh(std::vector<GLfloat> _vertexData, std::vector<GLushort> _indices);
 	Mesh(std::vector<GLfloat> _vertexData, std::vector<GLushort> _indices, MeshDataLayout _layout);
 	virtual ~Mesh();
+
+	static void SetGlobalWireFrame(bool _value);
+	void SetWireFrame(bool _value);
 
 	void SetTransformation(glm::vec3 _pos, glm::vec3 _rot, glm::vec3 _scale);
 	void Translate(glm::vec3 _pos);

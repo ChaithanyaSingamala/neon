@@ -93,11 +93,11 @@ bool SDL2Interface::Init()
 	ImGui_ImplSdlGL3_Init(window);
 
 #ifndef ANDROID_BUILD
-	windowOptStr = GetFromCommandOption("-vsync");
+	windowOptStr = GetFromCommandOption("-novsync");
 	if (windowOptStr != "")
-		SDL_GL_SetSwapInterval(1);
-	else
 		SDL_GL_SetSwapInterval(0);
+	else
+		SDL_GL_SetSwapInterval(1);
 #endif
 
 	return false;

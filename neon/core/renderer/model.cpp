@@ -3,7 +3,7 @@
 #include "engine\defines.h"
 #include "glm\gtc\matrix_transform.hpp"
 
-
+bool Mesh::isGlobalWireFrame = false;
 
 void Mesh::CreateVAO()
 {
@@ -95,6 +95,16 @@ Mesh::~Mesh()
 	glDeleteBuffers((GLsizei)vbos.size(), vbos.data());
 }
 
+void Mesh::SetGlobalWireFrame(bool _value)
+{
+	isGlobalWireFrame = true;
+}
+
+void Mesh::SetWireFrame(bool _value)
+{
+	isWireFrame = _value;
+}
+
 void Mesh::SetTransformation(glm::vec3 _pos, glm::vec3 _rot, glm::vec3 _scale)
 {
 	transform = glm::mat4(1);
@@ -135,10 +145,17 @@ void Mesh::ResetTransfrom()
 void Mesh::Render()
 {
 	BindVAO();
-	if (usingIndexBuffer)
+#ifdef GL_POLYMODE_SUPPORT
+	if(isGlobalWireFrame || isWireFrame)
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+#endif
+if (usingIndexBuffer)
 		glDrawElements(GL_TRIANGLES, vertexCount, GL_UNSIGNED_SHORT, 0);
 	else
 		glDrawArrays(GL_TRIANGLES, 0, vertexCount);
+#ifdef GL_POLYMODE_SUPPORT
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+#endif
 	UnbindVAO();
 }
 

@@ -46,7 +46,8 @@ bool TestLighting::Init()
 	lightPos = glm::vec3(1.5f, 0.0f, 0.0f);
 	testModelLightSource = CreateModelCube(shaderForLightSource);
 
-
+	//testMesh->SetWireFrame(true);
+	//testMesh->SetGlobalWireFrame(true);
 
 	glEnable(GL_DEPTH_TEST);
 
@@ -106,6 +107,9 @@ bool TestLighting::Render()
 			normalMat = glm::inverse(normalMat);
 			normalMat = glm::transpose(normalMat);
 			glUniformMatrix3fv(shader->GetUniformLocation("normalMatrix"), 1, GL_FALSE, glm::value_ptr(normalMat));
+			static float rot = 0.0;
+			rot = 0.1f * Engine::get()->GetDeltaTime();
+			testMesh->Rotate(glm::vec3(0.0, 1.0, 0.0), rot);
 			glUniformMatrix4fv(shader->GetUniformLocation("model"), 1, GL_FALSE, glm::value_ptr(testMesh->GetTransfrom()));
 			testMesh->Render();
 		}

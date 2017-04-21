@@ -13,7 +13,9 @@
 #include "glad\glad.h"
 #define GLSL_VERSION_STRING		"#version 140\n"
 #define GLSL_VERSION			"v140"
+#define GL_POLYMODE_SUPPORT
 #endif
+
 
 #ifndef USING_GLAD
 typedef void (* PFNGLGETSHADERIVPROC)(GLuint shader, GLenum pname, GLint *params);
