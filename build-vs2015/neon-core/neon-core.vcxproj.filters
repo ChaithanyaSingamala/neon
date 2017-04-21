@@ -73,6 +73,24 @@
     <ClInclude Include="..\..\neon\core\engine\defines.h">
       <Filter>engine</Filter>
     </ClInclude>
+    <ClInclude Include="..\..\neon\external\imgui\imgui_internal.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\neon\external\imgui\stb_rect_pack.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\neon\external\imgui\stb_textedit.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\neon\external\imgui\stb_truetype.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\neon\external\imgui\imgui.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\neon\external\imgui\imgui_impl_sdl_gl3.h">
+      <Filter>external\imgui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\neon\core\interface\neon_interface.cpp">
@@ -132,6 +150,18 @@
     <ClCompile Include="..\..\neon\core\interface\sdl2_interface.cpp">
       <Filter>interface</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\neon\external\imgui\imgui.cpp">
+      <Filter>external\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\neon\external\imgui\imgui_demo.cpp">
+      <Filter>external\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\neon\external\imgui\imgui_draw.cpp">
+      <Filter>external\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\neon\external\imgui\imgui_impl_sdl_gl3.cpp">
+      <Filter>external\imgui</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="interface">
@@ -154,6 +184,9 @@
     </Filter>
     <Filter Include="external\soil\src">
       <UniqueIdentifier>{67e5a14d-3976-4de0-961b-27b0b99dc313}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="external\imgui">
+      <UniqueIdentifier>{fd1b0785-c49c-4038-92fe-380a022eb3e4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

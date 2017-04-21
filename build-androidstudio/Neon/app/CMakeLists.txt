@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.4.1)
 
-add_definitions(-DGL_GLEXT_PROTOTYPES -DANDROID_BUILD)
+add_definitions(-DGL_GLEXT_PROTOTYPES -DANDROID_BUILD -DIMGUI_API= )
 
 file(GLOB SOURCES
     "../../../neon/core/engine/main.cpp"
@@ -29,7 +29,9 @@ file(GLOB SOIL_SOURCES
     "../../../neon/external/soil/src/*.c"
 )
 
-
+file(GLOB IMGUI_SOURCES
+    "../../../neon/external/imgui/*.cpp"
+)
 
 file(GLOB SDL_SOURCES
     "src/main/cpp/SDL2/src/*.c"
@@ -70,6 +72,7 @@ include_directories(../../../neon/core)
 include_directories(../../../neon/external/soil)
 include_directories(../../../neon/external/sdl2/include)
 include_directories(../../../neon/external/glm)
+include_directories(../../../neon/external/imgui)
 
 add_library(
              native-lib
@@ -78,6 +81,7 @@ add_library(
              ${SOURCES}
              ${SDL_SOURCES}
              ${SOIL_SOURCES}
+             ${IMGUI_SOURCES}
 
              )
 

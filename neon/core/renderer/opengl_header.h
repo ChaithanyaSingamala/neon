@@ -2,6 +2,8 @@
 
 #ifdef ANDROID_BUILD
 #include <EGL/egl.h>
+#include <GLES2/gl2.h>
+#include <GLES2/gl2ext.h>
 #include <GLES3/gl3.h>
 #include <GLES3/gl3ext.h>
 #define GLSL_VERSION_STRING		"#version 300 es\n"
@@ -18,8 +20,12 @@ typedef void (* PFNGLGETSHADERIVPROC)(GLuint shader, GLenum pname, GLint *params
 typedef void (* PFNGLGETSHADERINFOLOGPROC)(GLuint shader, GLsizei bufSize, GLsizei *length, GLchar *infoLog);
 #endif
 
-#define APIENTRY	
+#ifndef APIENTRY
+#define APIENTRY
+#endif
+#ifndef APIENTRYP
 #define APIENTRYP
+#endif
 
 enum
 {

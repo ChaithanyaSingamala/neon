@@ -3,6 +3,8 @@
 #include "../engine/engine.h"
 #include <SDL.h>
 #include <string>
+#include "imgui_impl_sdl_gl3.h"
+#include "imgui.h"
 
 void SDL2Interface::CalculateUpdateDeltaTime()
 {
@@ -88,6 +90,8 @@ bool SDL2Interface::Init()
 
 	sdlGL = SDL_GL_CreateContext(window);
 
+	ImGui_ImplSdlGL3_Init(window);
+
 #ifndef ANDROID_BUILD
 	windowOptStr = GetFromCommandOption("-vsync");
 	if (windowOptStr != "")
@@ -132,14 +136,13 @@ bool SDL2Interface::Update()
 		}
 	}		
 
-	SDL_GL_SwapWindow(window);
-
 	CalculateUpdateDeltaTime();
 #if ENABLE_FPS_PRINT
 	static Uint32 lastTime = SDL_GetTicks();
 	static int nbFrames = 0;
 	Uint32 currentTime = SDL_GetTicks();
 	nbFrames++;
+
 	if (currentTime - lastTime >= 1000) 
 	{ 	
 		char str[100];
@@ -150,11 +153,32 @@ bool SDL2Interface::Update()
 		lastTime = SDL_GetTicks();
 	}
 #endif
+
+	ImGui_ImplSdlGL3_NewFrame(window);
+	{
+		static float f = 0.0f;
+		//ImVec4 clear_color = ImColor(114, 144, 154);
+		//ImGui::Text("Hello, world!");
+		//ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
+		//ImGui::ColorEdit3("clear color", (float*)&clear_color);
+		//ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+
+		//ImGui::SetNextWindowSize(ImVec2(0, 0), ImGuiSetCond_FirstUseEver);
+		ImGui::Begin("FPS");
+		ImGui::Text("%.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+		ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
+		ImGui::End();
+	}
+
+	ImGui::Render();
+
+	SDL_GL_SwapWindow(window);
 	return true;
 }
 
 bool SDL2Interface::DeInit()
 {
+	ImGui_ImplSdlGL3_Shutdown();
 	SDL_GL_DeleteContext(sdlGL);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
