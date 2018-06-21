@@ -13,7 +13,7 @@ void OrbitCamera::UpdateViewMatrix()
 	posOffset.y = orbitHeight;
 	posOffset.z = orbitDistance * sin(glm::radians(orbitAngle));
 	//posOffset *= position;
-	std::cout << posOffset.x << "," << posOffset.z << std::endl;
+	//std::cout << posOffset.x << "," << posOffset.z << std::endl;
 
 	viewMatrix = glm::lookAt(posOffset, center, glm::vec3(0.0f,1.0f,0.0f));
 }
